@@ -72,6 +72,12 @@ const navLinks = [
       icon: "trash.png",
       canOpen: false,
     },
+    {
+      id: "settings",
+      name: "settings", // was "settings"
+      icon: "settings.png",
+      canOpen: true,
+    },
   ];
   
   const blogPosts = [
