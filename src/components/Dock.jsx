@@ -3,8 +3,10 @@ import { dockApps } from '#constants/index.js'
 import { Tooltip } from 'react-tooltip'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
+import useWindowStore from '#store/Window.js'
 
 const Dock = () => {
+  const { openWindow, closeWindow, windows } = useWindowStore();
   const [hoveredAppId, setHoveredAppId] = useState(null)
   const dockRef = useRef(null)
 
@@ -57,8 +59,17 @@ const Dock = () => {
   }, []);
 
 
-  const toggleApp = (app) => {
-    // will do it later
+  const toggleApp = (id) => {
+    const window = windows[id];
+    if (!window) return;
+
+    if(window.isOpen) {
+      closeWindow(id);
+    } 
+    else {
+      openWindow(id);
+    }
+    console.log(useWindowStore.getState().windows)
   }
 
   return (
@@ -87,7 +98,7 @@ const Dock = () => {
                 className="dock-icon"
                 aria-label={name}
                 disabled={!canOpen}
-                onClick={() => handleAppClick(id)}
+                onClick={() => toggleApp(id)}
               >
                 <img
                   src={`/images/${icon}`}

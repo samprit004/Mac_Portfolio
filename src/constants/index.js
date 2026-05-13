@@ -507,6 +507,7 @@ const navLinks = [
     terminal: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
     txtfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
     imgfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
+    settings: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   };
   
   export { INITIAL_Z_INDEX, WINDOW_CONFIG };
