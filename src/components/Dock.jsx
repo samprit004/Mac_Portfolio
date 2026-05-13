@@ -65,7 +65,10 @@ const Dock = () => {
     <section id="dock">
       <div ref={dockRef} className="dock-container">
         {dockApps.map(({ id, name, icon, canOpen }) => (
-          <div key={id ?? name} className="relative flex justify-center">
+          <div
+            key={id ?? name}
+            className={`relative flex justify-center ${id === 'settings' ? 'dock-divider-before' : ''}`}
+          >
             <div
               id={`dock-app-${id}`}
               className="flex justify-center"
@@ -90,7 +93,7 @@ const Dock = () => {
                   src={`/images/${icon}`}
                   alt={name}
                   loading="lazy"
-                  className={canOpen ? '' : 'opacity-60'}
+                  className={`dock-icon-image ${id === 'settings' ? 'dock-icon-image-settings' : ''} ${id === 'trash' ? 'dock-icon-image-archive' : ''} ${canOpen ? '' : 'opacity-60'}`}
                 />
               </button>
             </div>
