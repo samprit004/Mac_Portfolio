@@ -1,7 +1,7 @@
 import { Draggable } from 'gsap/Draggable'
 import gsap from 'gsap'
 
-import { Terminal } from '#windows/index.js'
+import { Terminal, Safari, Resume, Finder } from '#windows/index.js'
 import { Navbar, Welcome, Dock } from '#components/index.js'
 
 gsap.registerPlugin(Draggable)
@@ -12,7 +12,12 @@ const App = () => {
       <Navbar />
       <Welcome />
       <Dock />
+
+      {/* Windows */}
       <Terminal />
+      <Safari />
+      <Resume />
+      <Finder />
     </main>
   )
 }
