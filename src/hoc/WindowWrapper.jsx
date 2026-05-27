@@ -32,7 +32,22 @@ const WindowWrapper = (Component, windowKey) => {
             const el = ref.current;
             if(!el) return;
 
-            const [instance] = Draggable.create(el, {onpress: () => focusWindow(windowKey)});
+            const [instance] = Draggable.create(el, {
+                // Disable GSAP's built-in z-index boost — it uses an internal
+                // counter that produces values far below our React-managed range
+                // (1001+), causing pressed windows to sink behind others.
+                // We manage z-index entirely through focusWindow/openWindow.
+                zIndexBoost: false,
+                onpress: function() {
+                    // Bring this window to front on every press.
+                    // Safe to call unconditionally because onpress fires on
+                    // pointerdown, which is always before the click event that
+                    // triggers React's onClick / openWindow for any child window.
+                    // So if a child opens (onClick → openWindow), it runs AFTER
+                    // this focusWindow call and receives topZ+1, landing on top.
+                    focusWindow(windowKey);
+                },
+            });
             return () => instance.kill();
         },[])
 

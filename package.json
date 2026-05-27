@@ -16,6 +16,7 @@
     "@tailwindcss/vite": "^4.3.0",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.20",
+    "fuse.js": "^7.3.0",
     "gsap": "^3.15.0",
     "html2canvas": "^1.4.1",
     "immer": "^11.1.8",

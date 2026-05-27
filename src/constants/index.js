@@ -79,6 +79,77 @@ const navLinks = [
       canOpen: true,
     },
   ];
+
+  export const education = [
+    {
+      degree: "Bachelor of Technology - CSE (AI & ML)",
+      institute: "University of Engineering and Management, Kolkata",
+      score: "8.11 CGPA",
+      year: "2026",
+    },
+    {
+      degree: "Senior Secondary",
+      institute: "Dum Dum Kishore Bharati High School",
+      score: "88%",
+      year: "2022",
+    },
+    {
+      degree: "Secondary",
+      institute: "Dum Dum Kishore Bharati High School",
+      score: "88%",
+      year: "2020",
+    },
+  ]
+  
+  export const experience = [
+    {
+      company: "Meru Technosoft Private Limited",
+      role: "Frontend Developer",
+      duration: "Jun 2025 - Dec 2025",
+      location: "Gujarat, India",
+      description:
+        "Led frontend development of a scalable accounting platform using React and Tailwind CSS, building reusable component-based architectures and optimizing performance to improve workflows and accessibility.",
+    },
+    {
+      company: "Coding Jr.",
+      role: "AI Intern",
+      duration: "Sep 2025 - Dec 2025",
+      location: "Remote",
+      description:
+        "Worked on AI-powered solutions and automation workflows, assisting in prompt engineering, model integrations, and building intelligent user-focused features for real-world applications.",
+    },
+    {
+      company: "Meru Technosoft Private Limited",
+      role: "Frontend Developer",
+      duration: "Dec 2025 - Present",
+      location: "Gujarat, India",
+      description:
+        "Developed and optimized modern frontend applications with scalable UI solutions, efficient state management, and seamless backend integration.",
+    },
+  ]
+  export const achievements = [
+    {
+      title: "Winner - Best GenAI Hack Track",
+      organization: "Kolkata Hackathon",
+      year: "2025",
+      description:
+        "Won the Best GenAI Hack Track award for building an AI-powered legal awareness platform.",
+    },
+    {
+      title: "SIH 2024 Finalist",
+      organization: "Smart India Hackathon",
+      year: "2024",
+      description:
+        "Selected as a finalist for developing the S&T and R&D Coal Project Management System.",
+    },
+    {
+      title: "1st Place - Hackhive Hoopla 2.0",
+      organization: "UEM Kolkata",
+      year: "2024",
+      description:
+        "Secured 1st place for building an advanced home security solution during the hackathon.",
+    },
+  ]
   
   const blogPosts = [
     {
