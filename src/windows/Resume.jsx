@@ -18,11 +18,13 @@ const Resume = () => {
         <Download className='icon'/>
         </a>
     </div>
-    <Document file="/files/2026_job.pdf">
-        <Page pageNumber={1} 
-        renderTextLayer
-        renderAnnotationLayer />
-    </Document>
+    <div className='resume-body'>
+      <Document file="/files/2026_job.pdf">
+          <Page pageNumber={1} 
+          renderTextLayer
+          renderAnnotationLayer />
+      </Document>
+    </div>
     </>
   )
 }

@@ -31,14 +31,23 @@ const WindowWrapper = (Component, windowKey) => {
         useGSAP(() => {
             const el = ref.current;
             if(!el) return;
+            const dragHandle =
+                el.querySelector('[data-window-drag-handle="true"]') ||
+                el.querySelector('#window-header') ||
+                el.querySelector('.terminal-header');
+
+            if (dragHandle) {
+                dragHandle.style.touchAction = 'none';
+            }
 
             const [instance] = Draggable.create(el, {
+                trigger: dragHandle ?? el,
                 // Disable GSAP's built-in z-index boost — it uses an internal
                 // counter that produces values far below our React-managed range
                 // (1001+), causing pressed windows to sink behind others.
                 // We manage z-index entirely through focusWindow/openWindow.
                 zIndexBoost: false,
-                onpress: function() {
+                onPress: function() {
                     // Bring this window to front on every press.
                     // Safe to call unconditionally because onpress fires on
                     // pointerdown, which is always before the click event that

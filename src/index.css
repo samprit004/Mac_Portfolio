@@ -540,12 +540,37 @@ body {
   }
 
   #resume {
-    @apply w-fit h-fit absolute top-16 left-7/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    height: calc(100dvh - 5rem);
+    max-height: calc(100dvh - 5rem);
+    @apply w-fit absolute top-16 left-7/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden flex flex-col;
 
     #window-header {
+      @apply shrink-0;
+      position: relative;
+      z-index: 2;
+      touch-action: none;
+
       h2 {
         @apply font-bold text-sm text-center flex-1;
       }
+    }
+
+    .resume-body {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      height: 100%;
+      min-height: 0;
+      padding-bottom: 2rem;
+      overflow-y: auto;
+      overflow-x: hidden;
+      background: white;
+      touch-action: pan-y;
+      -webkit-overflow-scrolling: touch;
+
+      &::-webkit-scrollbar { width: 4px; }
+      &::-webkit-scrollbar-track { background: transparent; }
+      &::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.14); border-radius: 2px; }
     }
   }
 

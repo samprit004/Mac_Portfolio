@@ -9,7 +9,11 @@ const SafariHeader = () => {
   const currentTab = TABS.find((t) => t.id === activeTab);
 
   return (
-    <div className="flex flex-col select-none shrink-0" style={{ background: "#ececec" }}>
+    <div
+      className="flex flex-col select-none shrink-0"
+      style={{ background: "#ececec" }}
+      data-window-drag-handle="true"
+    >
       {/* Toolbar row */}
       <div
         className="flex items-center h-10"

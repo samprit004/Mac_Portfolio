@@ -11,7 +11,11 @@ const SafariPortfolio = () => {
       <div
         key={activeTab}
         className="flex-1 overflow-y-auto overflow-x-hidden"
-        style={{ animation: "safFade 0.12s ease" }}
+        style={{
+          animation: "safFade 0.12s ease",
+          touchAction: "pan-y",
+          WebkitOverflowScrolling: "touch",
+        }}
       >
         <GitHubProfile />
       </div>
