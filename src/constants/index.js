@@ -225,13 +225,6 @@ const navLinks = [
       bg: "#ff866b",
       link: "https://x.com/jsmasterypro",
     },
-    {
-      id: 4,
-      text: "LinkedIn",
-      icon: "/icons/linkedin.svg",
-      bg: "#05b6f6",
-      link: "https://www.linkedin.com/company/javascriptmastery/posts/?feedView=all",
-    },
   ];
   
   const photosLinks = [

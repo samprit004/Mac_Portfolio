@@ -138,7 +138,7 @@ export const COMMANDS = [
     description: 'Social media links',
     usage: 'socials',
     category: 'Portfolio',
-    keywords: ['socials', 'social', 'twitter', 'github', 'linkedin', 'links'],
+    keywords: ['socials', 'social', 'twitter', 'github', 'links'],
   },
   {
     name: 'experience',

@@ -2,7 +2,21 @@
   "permissions": {
     "allow": [
       "Bash(npm install:*)",
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "PowerShell(cd \"C:\\\\Users\\\\sampr\\\\OneDrive\\\\Desktop\\\\macbook\"; Get-ChildItem -Recurse -Path src | Select-Object -ExpandProperty FullName | ForEach-Object { $_ -replace [regex]::Escape\\(\\(Get-Location\\).Path + '\\\\'\\), '' })",
+      "Bash(npx vite *)",
+      "Bash(node -e \"const r = require\\('./node_modules/lucide-react/dist/cjs/lucide-react.js'\\); const keys = Object.keys\\(r\\).filter\\(k => k.toLowerCase\\(\\).includes\\('git'\\)\\); console.log\\(keys\\)\")",
+      "Bash(curl -s http://localhost:5555/)",
+      "Bash(npx playwright *)",
+      "Bash(node -e ' *)",
+      "Bash(grep -Hm1 ^description: 'C:\\\\Users\\\\sampr\\\\OneDrive\\\\Desktop\\\\macbook/.claude/skills/*/SKILL.md')",
+      "Bash(echo \"exit: $?\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5179/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5180/)",
+      "Bash(cat vite.config.js)",
+      "Bash(cat vite.config.ts)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(list\\(d.keys\\(\\)\\)\\)\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5181/)"
     ]
   }
 }
