@@ -278,6 +278,15 @@ const navLinks = [
     photosLinks,
     gallery,
   };
+
+  const SKILLS_LOCATION = {
+    id: "skills-root",
+    type: "skills",
+    name: "Skills",
+    icon: "/icons/skills.svg",
+    kind: "folder",
+    children: [],
+  };
   
   const WORK_LOCATION = {
     id: 1,
@@ -551,6 +560,7 @@ const navLinks = [
     work: WORK_LOCATION,
     about: ABOUT_LOCATION,
     resume: RESUME_LOCATION,
+    skills: SKILLS_LOCATION,
     trash: TRASH_LOCATION,
   };
   
