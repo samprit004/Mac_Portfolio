@@ -1,12 +1,14 @@
 import { useState, useRef } from 'react'
-import { dockApps } from '#constants/index.js'
+import { dockApps, locations } from '#constants/index.js'
 import { Tooltip } from 'react-tooltip'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import useWindowStore from '#store/Window.js'
+import useLocationStore from '#/store/location'
 
 const Dock = () => {
   const { openWindow, closeWindow, windows } = useWindowStore();
+  const { activeLocation, setActiveLocation } = useLocationStore();
   const [hoveredAppId, setHoveredAppId] = useState(null)
   const dockRef = useRef(null)
 
@@ -60,6 +62,16 @@ const Dock = () => {
 
 
   const toggleApp = (id) => {
+    if (id === 'trash') {
+      if (windows.finder?.isOpen && activeLocation?.id === locations.trash.id) {
+        closeWindow('finder');
+        return;
+      }
+      setActiveLocation(locations.trash);
+      openWindow('finder');
+      return;
+    }
+
     const window = windows[id];
     if (!window) return;
 
@@ -78,7 +90,7 @@ const Dock = () => {
         {dockApps.map(({ id, name, icon, canOpen }) => (
           <div
             key={id ?? name}
-            className={`relative flex justify-center ${id === 'settings' ? 'dock-divider-before' : ''}`}
+            className={`relative flex justify-center ${id === 'photos' ? 'dock-divider-before' : ''}`}
           >
             <div
               id={`dock-app-${id}`}
@@ -104,7 +116,7 @@ const Dock = () => {
                   src={`/images/${icon}`}
                   alt={name}
                   loading="lazy"
-                  className={`dock-icon-image ${id === 'settings' ? 'dock-icon-image-settings' : ''} ${id === 'trash' ? 'dock-icon-image-archive' : ''} ${canOpen ? '' : 'opacity-60'}`}
+                  className={`dock-icon-image ${id === 'trash' ? 'dock-icon-image-archive' : ''} ${canOpen ? '' : 'opacity-60'}`}
                 />
               </button>
             </div>

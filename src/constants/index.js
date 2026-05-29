@@ -49,12 +49,6 @@ const navLinks = [
       canOpen: true,
     },
     {
-      id: "photos",
-      name: "Gallery", // was "Photos"
-      icon: "photos.png",
-      canOpen: true,
-    },
-    {
       id: "contact",
       name: "Contact", // or "Get in touch"
       icon: "contact.png",
@@ -70,12 +64,12 @@ const navLinks = [
       id: "trash",
       name: "Archive", // was "Trash"
       icon: "trash.png",
-      canOpen: false,
+      canOpen: true,
     },
     {
-      id: "settings",
-      name: "settings", // was "settings"
-      icon: "settings.png",
+      id: "photos",
+      name: "Gallery", // was "Photos"
+      icon: "photos.png",
       canOpen: true,
     },
   ];
