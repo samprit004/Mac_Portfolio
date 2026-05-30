@@ -82,13 +82,13 @@ const Finder = () => {
     ))
 
     const renderSkillsSection = () => (
-        <div className="content max-w-none overflow-y-auto">
+        <div className="content skills-content max-w-none overflow-y-auto">
             <div className="mx-auto flex max-w-4xl flex-col gap-5">
                 {groupedSkills.map(({ key, label, items }) => (
                     <section key={key} className="space-y-2">
                         <div className="space-y-1.5">
-                            <h3 className="text-[14px] font-semibold tracking-[-0.02em] text-gray-900">{label}</h3>
-                            <div className="h-px w-full bg-[rgba(60,60,67,0.08)]" />
+                            <h3 className="text-[14px] font-semibold tracking-[-0.02em]" style={{ color: 'var(--window-text)' }}>{label}</h3>
+                            <div className="h-px w-full" style={{ background: 'var(--window-divider)' }} />
                         </div>
 
                         {items.length ? (
@@ -96,15 +96,20 @@ const Finder = () => {
                                 {items.map((item) => (
                                     <div
                                         key={item.id}
-                                        className="group flex items-center gap-1.5 rounded-full border border-[rgba(60,60,67,0.08)] bg-[rgba(246,246,248,0.9)] px-2.5 py-1.5 shadow-[0_2px_8px_rgba(15,23,42,0.04)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[rgba(0,122,255,0.18)] hover:bg-white hover:shadow-[0_6px_14px_rgba(15,23,42,0.08)]"
+                                        className="group flex items-center gap-1.5 rounded-full border px-2.5 py-1.5 transition-all duration-200 hover:-translate-y-0.5"
+                                        style={{
+                                            borderColor: 'var(--finder-chip-border)',
+                                            background: 'var(--finder-chip-bg)',
+                                            boxShadow: 'var(--finder-chip-shadow)',
+                                        }}
                                     >
                                         <img src={item.icon} alt={item.name} className="size-4 shrink-0 object-contain object-center opacity-90 transition-transform duration-200 group-hover:scale-105" />
-                                        <p className="text-[12px] font-medium leading-none tracking-[-0.01em] text-gray-700">{item.name}</p>
+                                        <p className="text-[12px] font-medium leading-none tracking-[-0.01em]" style={{ color: 'var(--finder-chip-text)' }}>{item.name}</p>
                                     </div>
                                 ))}
                             </div>
                         ) : (
-                            <p className="text-[13px] text-gray-400">No skills added yet.</p>
+                            <p className="text-[13px]" style={{ color: 'var(--window-muted)' }}>No skills added yet.</p>
                         )}
                     </section>
                 ))}
@@ -118,7 +123,7 @@ const Finder = () => {
         <WindowControls target="finder" />
         <Search className='icon' />
     </div>
-    <div className="bg-white flex h-full">
+    <div className="flex h-full" style={{ background: 'var(--window-content-bg)', color: 'var(--window-text)' }}>
         <div className="sidebar">
             <div>
             <h3>Favoriotes</h3>

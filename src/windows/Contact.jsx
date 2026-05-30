@@ -18,7 +18,7 @@ const DETAIL_ROWS = [
 ];
 
 const PinIcon = () => (
-  <svg viewBox="0 0 16 16" className="size-[11px] shrink-0 fill-[#8e8e93]">
+  <svg viewBox="0 0 16 16" className="size-[11px] shrink-0" style={{ fill: 'var(--window-muted)' }}>
     <path d="M8 1a4.5 4.5 0 0 1 4.5 4.5c0 2.89-4.5 9.5-4.5 9.5S3.5 9.39 3.5 5.5A4.5 4.5 0 0 1 8 1zm0 2.5a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" />
   </svg>
 );
@@ -88,8 +88,11 @@ const SOCIAL_LINKS = [
 
 const SocialButton = ({ href, icon, label, className, onClick, copied = false, active = false }) => {
   const sharedClassName = `group relative`;
-  const iconClassName = `flex size-11 items-center justify-center rounded-full border border-black/5 shadow-sm transition duration-150 hover:-translate-y-0.5 ${active ? 'ring-2 ring-[#3478f6]/25 ring-offset-2 ring-offset-white' : ''} ${className}`;
+  const iconClassName = `flex size-11 items-center justify-center rounded-full border border-black/5 shadow-sm transition duration-150 hover:-translate-y-0.5 ${className}`;
   const tooltipLabel = copied ? 'Copied' : label;
+  const activeStyle = active
+    ? { outline: '2px solid rgba(52, 120, 246, 0.25)', outlineOffset: '2px' }
+    : undefined;
 
   if (onClick) {
     return (
@@ -98,10 +101,13 @@ const SocialButton = ({ href, icon, label, className, onClick, copied = false, a
         onClick={onClick}
         className={sharedClassName}
       >
-        <span className={iconClassName}>
+        <span className={iconClassName} style={activeStyle}>
           {icon}
         </span>
-        <span className="pointer-events-none absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap rounded bg-black/80 px-2 py-1 text-[10px] font-medium text-white opacity-0 transition-opacity duration-150 group-hover:opacity-100">
+        <span
+          className="pointer-events-none absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap rounded px-2 py-1 text-[10px] font-medium opacity-0 transition-opacity duration-150 group-hover:opacity-100"
+          style={{ background: 'var(--contact-tooltip-bg)', color: 'var(--contact-tooltip-text)' }}
+        >
           {tooltipLabel}
         </span>
       </button>
@@ -115,10 +121,13 @@ const SocialButton = ({ href, icon, label, className, onClick, copied = false, a
       rel="noopener noreferrer"
       className={sharedClassName}
     >
-      <span className={iconClassName}>
+      <span className={iconClassName} style={activeStyle}>
         {icon}
       </span>
-      <span className="pointer-events-none absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap rounded bg-black/80 px-2 py-1 text-[10px] font-medium text-white opacity-0 transition-opacity duration-150 group-hover:opacity-100">
+      <span
+        className="pointer-events-none absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap rounded px-2 py-1 text-[10px] font-medium opacity-0 transition-opacity duration-150 group-hover:opacity-100"
+        style={{ background: 'var(--contact-tooltip-bg)', color: 'var(--contact-tooltip-text)' }}
+      >
         {tooltipLabel}
       </span>
     </a>
@@ -126,30 +135,32 @@ const SocialButton = ({ href, icon, label, className, onClick, copied = false, a
 };
 
 const MailComposePanel = ({ form, onChange, onSend }) => (
-  <div className="mt-8 flex flex-col bg-white">
-    <div className="border-y border-[rgba(60,60,67,0.08)]">
+  <div className="mt-8 flex flex-col" style={{ background: 'var(--window-content-bg)', color: 'var(--window-text)' }}>
+    <div className="border-y" style={{ borderColor: 'var(--window-divider)' }}>
       <div className="grid grid-cols-[78px_minmax(0,1fr)] items-center px-6 py-2.5">
-        <span className="text-[13px] font-normal text-[#8e8e93]">To:</span>
-        <span className="text-[14px] font-medium text-[#1c1c1e]">sampritdas2004@gmail.com</span>
+        <span className="text-[13px] font-normal" style={{ color: 'var(--window-muted)' }}>To:</span>
+        <span className="text-[14px] font-medium" style={{ color: 'var(--window-text)' }}>sampritdas2004@gmail.com</span>
       </div>
-      <div className="grid grid-cols-[78px_minmax(0,1fr)] items-center border-t border-[rgba(60,60,67,0.08)] px-6 py-2.5">
-        <span className="text-[13px] font-normal text-[#8e8e93]">From:</span>
+      <div className="grid grid-cols-[78px_minmax(0,1fr)] items-center border-t px-6 py-2.5" style={{ borderColor: 'var(--window-divider)' }}>
+        <span className="text-[13px] font-normal" style={{ color: 'var(--window-muted)' }}>From:</span>
         <input
           type="email"
           value={form.from}
           onChange={(event) => onChange('from', event.target.value)}
           placeholder="your@email.com"
-          className="w-full border-none bg-transparent text-[14px] font-normal text-[#1c1c1e] outline-none placeholder:text-[#aeaeb2]"
+          className="w-full border-none bg-transparent text-[14px] font-normal outline-none"
+          style={{ color: 'var(--window-text)' }}
         />
       </div>
-      <div className="grid grid-cols-[78px_minmax(0,1fr)] items-center border-t border-[rgba(60,60,67,0.08)] px-6 py-2.5">
-        <span className="text-[13px] font-normal text-[#8e8e93]">Subject:</span>
+      <div className="grid grid-cols-[78px_minmax(0,1fr)] items-center border-t px-6 py-2.5" style={{ borderColor: 'var(--window-divider)' }}>
+        <span className="text-[13px] font-normal" style={{ color: 'var(--window-muted)' }}>Subject:</span>
         <input
           type="text"
           value={form.subject}
           onChange={(event) => onChange('subject', event.target.value)}
           placeholder="Let’s work together"
-          className="w-full border-none bg-transparent text-[14px] font-normal text-[#1c1c1e] outline-none placeholder:text-[#aeaeb2]"
+          className="w-full border-none bg-transparent text-[14px] font-normal outline-none"
+          style={{ color: 'var(--window-text)' }}
         />
       </div>
     </div>
@@ -158,10 +169,11 @@ const MailComposePanel = ({ form, onChange, onSend }) => (
         value={form.body}
         onChange={(event) => onChange('body', event.target.value)}
         placeholder="Write your message here..."
-        className="min-h-[320px] w-full resize-none border-none bg-transparent px-0 py-0 text-[14px] font-normal text-[#1c1c1e] outline-none placeholder:text-[#aeaeb2]"
+        className="min-h-[320px] w-full resize-none border-none bg-transparent px-0 py-0 text-[14px] font-normal outline-none"
+        style={{ color: 'var(--window-text)' }}
       />
     </div>
-    <div className="sticky bottom-0 flex justify-end border-t border-[rgba(60,60,67,0.08)] bg-white px-6 py-3">
+    <div className="sticky bottom-0 flex justify-end border-t px-6 py-3" style={{ borderColor: 'var(--window-divider)', background: 'var(--window-content-bg)' }}>
       <button
         type="button"
         onClick={onSend}
@@ -177,7 +189,7 @@ const DetailRow = ({ label, value, href, multiline = false, isLast = false }) =>
   <>
     <div className={`flex justify-center px-4 ${multiline ? 'py-3' : 'min-h-[10px] py-2'}`}>
       <div className="grid w-full max-w-[360px] grid-cols-[120px_minmax(0,1fr)] items-center gap-x-3">
-        <span className="text-right text-sm font-normal capitalize text-[#8e8e93]">
+        <span className="text-right text-sm font-normal capitalize" style={{ color: 'var(--window-muted)' }}>
           {label}
         </span>
         {href ? (
@@ -185,18 +197,22 @@ const DetailRow = ({ label, value, href, multiline = false, isLast = false }) =>
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-left text-[17px] font-semibold leading-[1.35] text-[#1c1c1e]"
+            className="text-left text-[17px] font-semibold leading-[1.35]"
+            style={{ color: 'var(--window-text)' }}
           >
             {value}
           </a>
         ) : (
-          <span className={`text-left leading-[1.4] text-[#1c1c1e] ${multiline ? 'text-[16px]' : 'text-[17px] font-semibold'}`}>
+          <span
+            className={`text-left leading-[1.4] ${multiline ? 'text-[16px]' : 'text-[17px] font-semibold'}`}
+            style={{ color: 'var(--window-text)' }}
+          >
             {value}
           </span>
         )}
       </div>
     </div>
-    {!isLast && <div className="h-px w-full bg-[rgba(60,60,67,0.08)]" />}
+    {!isLast && <div className="h-px w-full" style={{ background: 'var(--window-divider)' }} />}
   </>
 );
 
@@ -258,19 +274,23 @@ const Contact = () => {
   };
 
   return (
-  <div className="flex h-full min-h-0 flex-col bg-white font-['SF_Pro_Text','SF_Pro_Display','-apple-system','BlinkMacSystemFont','Segoe_UI',sans-serif]">
+  <div
+    className="flex h-full min-h-0 flex-col font-['SF_Pro_Text','SF_Pro_Display','-apple-system','BlinkMacSystemFont','Segoe_UI',sans-serif]"
+    style={{ background: 'var(--window-content-bg)', color: 'var(--window-text)' }}
+  >
     <div
       id="window-header"
-      className="relative flex h-[38px] shrink-0 items-center justify-center border-b border-black/10 bg-linear-to-b from-[#f0f0f0] to-[#e8e8e8]"
+      className="relative flex h-[38px] shrink-0 items-center justify-center border-b"
+      style={{ borderColor: 'var(--window-divider)', background: 'var(--contact-header-bg)' }}
     >
       <div className="absolute left-[10px]">
         <WindowControls target="contact" />
       </div>
-      <span className="text-[13px] font-semibold tracking-[-0.1px] text-[#1c1c1e]">Contacts</span>
+      <span className="text-[13px] font-semibold tracking-[-0.1px]" style={{ color: 'var(--contact-title)' }}>Contacts</span>
     </div>
 
     <div className="flex min-h-0 flex-1 overflow-hidden">
-      <div className="flex min-h-0 flex-1 flex-col overflow-y-auto overflow-x-hidden bg-white">
+      <div className="flex min-h-0 flex-1 flex-col overflow-y-auto overflow-x-hidden" style={{ background: 'var(--window-content-bg)' }}>
         <div className="mx-auto flex w-full max-w-[520px] shrink-0 items-center justify-center gap-5 px-[18px] pt-7 text-left">
           <img
             src="https://github.com/samprit004.png"
@@ -278,13 +298,13 @@ const Contact = () => {
             className="size-[84px] rounded-full border border-black/10 object-cover shadow-sm"
           />
           <div className="flex min-w-0 flex-col justify-center">
-            <h1 className="text-[24px] font-bold leading-tight tracking-[-0.35px] text-[#1c1c1e]">
+            <h1 className="text-[24px] font-bold leading-tight tracking-[-0.35px]" style={{ color: 'var(--contact-title)' }}>
               Samprit Das
             </h1>
-            <p className="mt-1 text-[13px] font-normal text-[#3c3c43]">
+            <p className="mt-1 text-[13px] font-normal" style={{ color: 'var(--contact-subtitle)' }}>
               Full Stack Developer · React · Node.js · MongoDB
             </p>
-            <p className="mt-1 flex items-center gap-1 text-[12px] text-[#8e8e93]">
+            <p className="mt-1 flex items-center gap-1 text-[12px]" style={{ color: 'var(--window-muted)' }}>
               <PinIcon />
               Kolkata, India
             </p>
@@ -316,7 +336,7 @@ const Contact = () => {
             onSend={handleSendMail}
           />
         ) : (
-        <div className="mx-auto mt-12 w-full max-w-[520px] shrink-0 bg-white px-[18px]">
+        <div className="mx-auto mt-12 w-full max-w-[520px] shrink-0 px-[18px]" style={{ background: 'var(--window-content-bg)' }}>
           {DETAIL_ROWS.map((row, index) => (
             <DetailRow
               key={row.label}

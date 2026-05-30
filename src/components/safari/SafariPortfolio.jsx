@@ -6,7 +6,7 @@ const SafariPortfolio = () => {
   const activeTab = useSafariStore((s) => s.activeTab);
 
   return (
-    <div className="flex flex-col h-full" style={{ background: "#ffffff" }}>
+    <div className="flex flex-col h-full" style={{ background: "var(--window-bg)", color: "var(--window-text)" }}>
       <SafariHeader />
       <div
         key={activeTab}

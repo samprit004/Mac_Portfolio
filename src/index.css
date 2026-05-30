@@ -22,15 +22,111 @@
   font-style: normal;
 }
 
+:root {
+  --app-wallpaper: url("/images/wallpaper-3.svg");
+  --app-surface: transparent;
+  --nav-bg: rgba(255, 255, 255, 0.5);
+  --nav-text: #0f172a;
+  --nav-muted: #111827;
+  --nav-icon-filter: none;
+  --icon-hover-bg: rgba(229, 231, 235, 0.9);
+  --dock-bg: rgba(255, 255, 255, 0.2);
+  --dock-divider: rgba(255, 255, 255, 0.45);
+  --window-bg: #ffffff;
+  --window-subtle-bg: #f8fafc;
+  --window-content-bg: #ffffff;
+  --window-header-bg: #f9fafb;
+  --window-header-border: #e5e7eb;
+  --window-header-text: #6b7280;
+  --window-border: rgba(0, 0, 0, 0.14);
+  --window-shadow: 0 24px 80px rgba(0, 0, 0, 0.3), 0 0 0 0.5px rgba(0, 0, 0, 0.12);
+  --window-text: #1f2937;
+  --window-muted: #6b7280;
+  --window-divider: rgba(60, 60, 67, 0.08);
+  --finder-active-bg: #dbeafe;
+  --finder-active-text: #1d4ed8;
+  --finder-hover-bg: #e5e7eb;
+  --finder-chip-bg: rgba(246, 246, 248, 0.9);
+  --finder-chip-border: rgba(60, 60, 67, 0.08);
+  --finder-chip-hover-border: rgba(0, 122, 255, 0.18);
+  --finder-chip-text: #374151;
+  --finder-chip-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  --finder-chip-hover-shadow: 0 6px 14px rgba(15, 23, 42, 0.08);
+  --contact-header-bg: linear-gradient(180deg, #f0f0f0 0%, #e8e8e8 100%);
+  --contact-title: #1c1c1e;
+  --contact-subtitle: #3c3c43;
+  --contact-tooltip-bg: rgba(0, 0, 0, 0.8);
+  --contact-tooltip-text: #ffffff;
+  --contact-button-ring-offset: #ffffff;
+  --safari-chrome-bg: #ececec;
+  --safari-tab-strip-bg: #d9d9d9;
+  --safari-tab-active-bg: #ffffff;
+  --safari-tab-border: #c8c8c8;
+  --safari-text: #1c1c1e;
+  --safari-muted: #555555;
+  --safari-address-bg: rgba(0, 0, 0, 0.06);
+  --safari-address-border: rgba(0, 0, 0, 0.1);
+  --safari-address-icon: #9ca3af;
+}
+
+:root[data-theme='dark'] {
+  --app-wallpaper: url("/images/wallpaper-3.svg");
+  --app-surface: rgba(2, 6, 23, 0.22);
+  --nav-bg: rgba(13, 17, 23, 0.72);
+  --nav-text: #e5e7eb;
+  --nav-muted: #cbd5e1;
+  --nav-icon-filter: brightness(0) invert(1);
+  --icon-hover-bg: rgba(255, 255, 255, 0.06);
+  --dock-bg: rgba(13, 17, 23, 0.58);
+  --dock-divider: rgba(255, 255, 255, 0.14);
+  --window-bg: #0d1117;
+  --window-subtle-bg: #11161d;
+  --window-content-bg: #0d1117;
+  --window-header-bg: #161b22;
+  --window-header-border: rgba(255, 255, 255, 0.08);
+  --window-header-text: #8b949e;
+  --window-border: rgba(255, 255, 255, 0.08);
+  --window-shadow: 0 24px 80px rgba(0, 0, 0, 0.62), 0 0 0 0.5px rgba(255, 255, 255, 0.06);
+  --window-text: #e6edf3;
+  --window-muted: #8b949e;
+  --window-divider: rgba(255, 255, 255, 0.08);
+  --finder-active-bg: rgba(37, 99, 235, 0.18);
+  --finder-active-text: #93c5fd;
+  --finder-hover-bg: rgba(255, 255, 255, 0.06);
+  --finder-chip-bg: rgba(22, 27, 34, 0.96);
+  --finder-chip-border: rgba(255, 255, 255, 0.08);
+  --finder-chip-hover-border: rgba(96, 165, 250, 0.4);
+  --finder-chip-text: #e6edf3;
+  --finder-chip-shadow: 0 2px 10px rgba(15, 23, 42, 0.28);
+  --finder-chip-hover-shadow: 0 8px 18px rgba(15, 23, 42, 0.36);
+  --contact-header-bg: linear-gradient(180deg, #161b22 0%, #0d1117 100%);
+  --contact-title: #f8fafc;
+  --contact-subtitle: #cbd5e1;
+  --contact-tooltip-bg: rgba(13, 17, 23, 0.96);
+  --contact-tooltip-text: #e6edf3;
+  --contact-button-ring-offset: #0d1117;
+  --safari-chrome-bg: #161b22;
+  --safari-tab-strip-bg: #11161d;
+  --safari-tab-active-bg: #0d1117;
+  --safari-tab-border: rgba(255, 255, 255, 0.08);
+  --safari-text: #e6edf3;
+  --safari-muted: #8b949e;
+  --safari-address-bg: rgba(255, 255, 255, 0.05);
+  --safari-address-border: rgba(255, 255, 255, 0.08);
+  --safari-address-icon: #8b949e;
+}
+
 html,
 body {
   width: 100dvw;
   overflow: hidden;
   height: 100dvh;
-  background-image: url("/images/wallpaper-3.svg");
+  background-color: #020617;
+  background-image: var(--app-wallpaper);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  color: var(--window-text);
 }
 
 @theme {
@@ -58,10 +154,13 @@ body {
 @layer base {
   main {
     @apply relative w-dvw h-dvh overflow-hidden;
+    background: var(--app-surface);
   }
 
   nav {
     @apply flex justify-between items-center bg-white/50 backdrop-blur-3xl p-2 px-5 select-none;
+    background: var(--nav-bg);
+    color: var(--nav-text);
 
     div {
       @apply flex items-center max-sm:w-full max-sm:justify-center gap-5;
@@ -80,7 +179,12 @@ body {
     }
 
     time {
-      @apply text-sm font-medium text-black;
+      @apply text-sm font-medium;
+      color: var(--nav-muted);
+    }
+
+    .nav-icon {
+      filter: var(--nav-icon-filter);
     }
   }
 }
@@ -88,6 +192,10 @@ body {
 @layer components {
   .icon {
     @apply p-1 hover:bg-gray-200 rounded hover:cursor-default;
+  }
+
+  .icon:hover {
+    background: var(--icon-hover-bg);
   }
 
   #welcome {
@@ -107,6 +215,7 @@ body {
 
     .dock-container {
       @apply bg-white/20 backdrop-blur-md justify-between rounded-2xl p-1.5 flex items-end gap-1.5;
+      background: var(--dock-bg);
     }
 
     .tooltip {
@@ -144,7 +253,8 @@ body {
 
       &::before {
         content: "";
-        @apply absolute left-0 top-1/2 h-11 w-px -translate-y-1/2 rounded-full bg-white/45;
+        @apply absolute left-0 top-1/2 h-11 w-px -translate-y-1/2 rounded-full;
+        background: var(--dock-divider);
       }
     }
   }
@@ -167,6 +277,9 @@ body {
 
   #window-header {
     @apply flex items-center justify-between px-4 py-3 rounded-t-lg bg-gray-50 border-b border-gray-200 select-none text-sm text-gray-400;
+    background: var(--window-header-bg);
+    border-color: var(--window-header-border);
+    color: var(--window-header-text);
   }
 
   #safari {
@@ -177,9 +290,9 @@ body {
     left: 12%;
     border-radius: 12px;
     overflow: hidden;
-    background: #ffffff;
-    border: 1px solid rgba(0,0,0,0.18);
-    box-shadow: 0 22px 70px rgba(0,0,0,0.35), 0 0 0 0.5px rgba(0,0,0,0.12);
+    background: var(--window-bg);
+    border: 1px solid var(--window-border);
+    box-shadow: var(--window-shadow);
   }
 
   /* ── Terminal window ──────────────────────────────────────────────────── */
@@ -455,9 +568,10 @@ body {
     width: 760px;
     height: 600px;
     min-height: 0;
-    border: 1px solid rgba(0,0,0,0.14);
-    box-shadow: 0 24px 80px rgba(0,0,0,0.3), 0 0 0 0.5px rgba(0,0,0,0.12);
+    border: 1px solid var(--window-border);
+    box-shadow: var(--window-shadow);
     @apply absolute top-24 left-[38%] bg-white rounded-xl overflow-hidden flex flex-col;
+    background: var(--window-bg);
   }
 
   #photos {
@@ -524,6 +638,9 @@ body {
     height: calc(100dvh - 5rem);
     max-height: calc(100dvh - 5rem);
     @apply w-fit absolute top-16 left-7/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden flex flex-col;
+    background: var(--window-bg);
+    border: 1px solid var(--window-border);
+    box-shadow: var(--window-shadow);
 
     #window-header {
       @apply shrink-0;
@@ -545,7 +662,7 @@ body {
       padding-bottom: 2rem;
       overflow-y: auto;
       overflow-x: hidden;
-      background: white;
+      background: var(--window-content-bg);
       touch-action: pan-y;
       -webkit-overflow-scrolling: touch;
 
@@ -557,12 +674,18 @@ body {
 
   #finder {
     @apply absolute w-3xl left-40 top-20 shadow-2xl drop-shadow-2xl overflow-hidden rounded-xl;
+    background: var(--window-bg);
+    border: 1px solid var(--window-border);
+    box-shadow: var(--window-shadow);
 
     .sidebar {
       @apply w-48 bg-gray-50 border-r border-gray-200 flex flex-col p-5 space-y-3;
+      background: var(--window-subtle-bg);
+      border-color: var(--window-header-border);
 
       h3 {
         @apply text-xs font-medium text-gray-400 mb-1;
+        color: var(--window-muted);
       }
 
       ul {
@@ -570,10 +693,17 @@ body {
 
         .active {
           @apply bg-blue-100 text-blue-700;
+          background: var(--finder-active-bg);
+          color: var(--finder-active-text);
         }
 
         .not-active {
           @apply text-gray-700 hover:bg-gray-200;
+          color: var(--window-text);
+
+          &:hover {
+            background: var(--finder-hover-bg);
+          }
         }
 
         li {
@@ -584,6 +714,7 @@ body {
 
     .content {
       @apply flex-1 p-8 bg-white max-w-2xl relative;
+      background: var(--window-content-bg);
 
       li {
         @apply absolute flex items-center flex-col gap-3;
@@ -594,6 +725,7 @@ body {
 
         p {
           @apply text-sm text-center font-medium w-40;
+          color: var(--window-text);
         }
       }
     }
@@ -601,23 +733,45 @@ body {
 
   #txtfile {
     @apply w-md absolute top-36 right-32 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    background: var(--window-bg);
+    border: 1px solid var(--window-border);
+    box-shadow: var(--window-shadow);
 
     h2 {
       @apply font-bold text-sm text-center w-full;
+      color: var(--window-text);
+    }
+
+    .file-body {
+      background: var(--window-content-bg);
+      color: var(--window-text);
+    }
+
+    .file-subtitle {
+      color: var(--window-muted);
+    }
+
+    .file-description {
+      color: var(--window-text);
     }
   }
 
   #imgfile {
     @apply w-xl absolute top-40 left-2/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    background: var(--window-bg);
+    border: 1px solid var(--window-border);
+    box-shadow: var(--window-shadow);
 
     #window-header {
-      p {
-        @apply font-bold text-[#5f6266];
+      h2 {
+        @apply font-bold;
+        color: var(--window-text);
       }
     }
 
     .preview {
       @apply p-2 bg-gray-200 max-h-[70vh];
+      background: var(--window-subtle-bg);
 
       img {
         @apply w-full h-fit object-contain object-center;

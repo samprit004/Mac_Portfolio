@@ -2,16 +2,18 @@ import React from 'react'
 import dayjs from 'dayjs'
 
 import { navLinks, navIcons } from '#constants/index.js'
+import useThemeStore from '#store/theme.js'
 import useWindowStore from '#store/Window.js'
 
 const Navbar = () => {
 
   const {openWindow} = useWindowStore();
+  const { theme, toggleTheme } = useThemeStore();
 
   return (
     <nav>
     <div>
-      <img src="/images/logo.svg" alt="logo" />
+      <img src="/images/logo.svg" alt="logo" className="nav-icon" />
       <p className=' font-bold'>Samprit Das</p>
       <ul>
         {navLinks.map((item) => (
@@ -25,8 +27,17 @@ const Navbar = () => {
     <div>
       <ul>
         {navIcons.map((item) => (
-        <li key={item.id}>
-          <img src={item.img}  className="icon-hover" alt={item.id}/>
+        <li
+          key={item.id}
+          onClick={item.img.includes('mode') ? toggleTheme : undefined}
+          className={item.img.includes('mode') ? 'cursor-pointer' : undefined}
+          title={item.img.includes('mode') ? `Switch to ${theme === 'dark' ? 'light' : 'dark'} mode` : undefined}
+        >
+          <img
+            src={item.img}
+            className={`nav-icon icon-hover ${item.img.includes('mode') && theme === 'dark' ? 'opacity-80' : ''}`}
+            alt={item.img.includes('mode') ? 'toggle theme' : item.id}
+          />
         </li>
       ))}
       </ul>

@@ -17,15 +17,15 @@ const Text = () => {
         <h2>{name}</h2>
         <div className="w-15" />
       </div>
-      <div className="p-6 space-y-4 overflow-y-auto max-h-[70vh]">
+      <div className="file-body p-6 space-y-4 overflow-y-auto max-h-[70vh]">
         {image && (
           <img src={image} alt={name} className="w-full rounded-lg object-cover max-h-48" />
         )}
         {subtitle && (
-          <p className="text-xs font-medium text-gray-400 uppercase tracking-widest">{subtitle}</p>
+          <p className="file-subtitle text-xs font-medium uppercase tracking-widest">{subtitle}</p>
         )}
         {description?.map((para, i) => (
-          <p key={i} className="text-sm text-gray-700 leading-relaxed">{para}</p>
+          <p key={i} className="file-description text-sm leading-relaxed">{para}</p>
         ))}
       </div>
     </>

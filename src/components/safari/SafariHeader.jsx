@@ -11,13 +11,13 @@ const SafariHeader = () => {
   return (
     <div
       className="flex flex-col select-none shrink-0"
-      style={{ background: "#ececec" }}
+      style={{ background: "var(--safari-chrome-bg)" }}
       data-window-drag-handle="true"
     >
       {/* Toolbar row */}
       <div
         className="flex items-center h-10"
-        style={{ borderBottom: "1px solid #c8c8c8" }}
+        style={{ borderBottom: "1px solid var(--safari-tab-border)" }}
       >
         {/* Traffic lights */}
         <div className="px-3">
