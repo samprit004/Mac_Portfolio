@@ -11,7 +11,7 @@ const Navbar = () => {
   const { theme, toggleTheme } = useThemeStore();
 
   return (
-    <nav>
+    <nav className="max-sm:hidden">
     <div>
       <img src="/images/logo.svg" alt="logo" className="nav-icon" />
       <p className=' font-bold'>Samprit Das</p>

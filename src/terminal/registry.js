@@ -67,10 +67,10 @@ export const COMMANDS = [
     name: 'theme',
     aliases: ['color'],
     description: 'Switch terminal colour theme',
-    usage: 'theme [list | dark | dracula | nord | solarized]',
+    usage: 'theme [list | dark | light]',
     category: 'System',
     keywords: ['theme', 'color', 'colours', 'appearance', 'skin'],
-    subcommands: ['list', 'dark', 'dracula', 'nord', 'solarized'],
+    subcommands: ['list', 'dark', 'light'],
   },
   {
     name: 'neofetch',

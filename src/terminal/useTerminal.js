@@ -38,55 +38,25 @@ export const THEMES = {
     selectionBg: '#264f78',
     cursorColor: '#58a6ff',
   },
-  dracula: {
-    name: 'dracula',
-    bg: '#282a36',
-    headerBg: '#21222c',
-    text: '#f8f8f2',
-    prompt: '#bd93f9',
-    promptHost: '#50fa7b',
-    dim: '#6272a4',
-    success: '#50fa7b',
-    error: '#ff5555',
-    warning: '#f1fa8c',
-    info: '#8be9fd',
-    border: 'rgba(255,255,255,0.1)',
-    selectionBg: '#44475a',
-    cursorColor: '#bd93f9',
-  },
-  nord: {
-    name: 'nord',
-    bg: '#2e3440',
-    headerBg: '#232731',
-    text: '#d8dee9',
-    prompt: '#81a1c1',
-    promptHost: '#a3be8c',
-    dim: '#4c566a',
-    success: '#a3be8c',
-    error: '#bf616a',
-    warning: '#ebcb8b',
-    info: '#88c0d0',
-    border: 'rgba(255,255,255,0.07)',
-    selectionBg: '#434c5e',
-    cursorColor: '#81a1c1',
-  },
-  solarized: {
-    name: 'solarized',
-    bg: '#002b36',
-    headerBg: '#073642',
-    text: '#839496',
-    prompt: '#268bd2',
-    promptHost: '#859900',
-    dim: '#586e75',
-    success: '#859900',
-    error: '#dc322f',
-    warning: '#b58900',
-    info: '#2aa198',
-    border: 'rgba(255,255,255,0.07)',
-    selectionBg: '#073642',
-    cursorColor: '#268bd2',
+  light: {
+    name: 'light',
+    bg: '#f8fafc',
+    headerBg: '#eef2f7',
+    text: '#0f172a',
+    prompt: '#2563eb',
+    promptHost: '#0f766e',
+    dim: '#64748b',
+    success: '#15803d',
+    error: '#dc2626',
+    warning: '#b45309',
+    info: '#0369a1',
+    border: 'rgba(15,23,42,0.12)',
+    selectionBg: '#dbeafe',
+    cursorColor: '#2563eb',
   },
 };
+
+const LIVE_THEME_INPUT_PREFIX = '/theme ';
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -1000,7 +970,16 @@ const useTerminal = () => {
     setInput(val);
     setHistIdx(-1);
     updateSuggestions(val);
-  }, [updateSuggestions]);
+
+    const trimmed = val.trim().toLowerCase();
+    if (trimmed.startsWith(LIVE_THEME_INPUT_PREFIX)) {
+      const requestedTheme = trimmed.slice(LIVE_THEME_INPUT_PREFIX.length).trim();
+      const nextTheme = THEMES[requestedTheme];
+      if (nextTheme && nextTheme.name !== theme.name) {
+        setTheme(nextTheme);
+      }
+    }
+  }, [setTheme, theme.name, updateSuggestions]);
 
   // Focus terminal on any click in the body
   const focusInput = useCallback(() => {

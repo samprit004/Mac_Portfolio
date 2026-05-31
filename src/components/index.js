@@ -3,4 +3,7 @@ import Welcome from './Welcome'
 import Dock from './Dock'
 import WindowControls from './WindowControls'
 import Home from './Home'
-export { Navbar, Welcome, Dock, WindowControls, Home };
+import MobileHomeScreen from './MobileHomeScreen'
+import MobileStatusBar from './MobileStatusBar'
+import IntroOverlay from './IntroOverlay'
+export { Navbar, Welcome, Dock, WindowControls, Home, MobileHomeScreen, MobileStatusBar, IntroOverlay };
