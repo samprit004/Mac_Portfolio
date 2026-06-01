@@ -6,6 +6,8 @@ import MobileImageFile from '../windows/mobile/screens/MobileImageFile.jsx'
 import MobileResume from '../windows/mobile/screens/MobileResume.jsx'
 import MobileSafari from '../windows/mobile/screens/MobileSafari.jsx'
 import MobileContact from '../windows/mobile/screens/MobileContact.jsx'
+import MobileGmail from '../windows/mobile/screens/MobileGmail.jsx'
+import MobilePhotos from '../windows/mobile/screens/MobilePhotos.jsx'
 import MobileSkills from '../windows/mobile/screens/MobileSkills.jsx'
 
 const SCREEN_MAP = {
@@ -16,6 +18,8 @@ const SCREEN_MAP = {
   resume: MobileResume,
   safari: MobileSafari,
   contact: MobileContact,
+  gmail: MobileGmail,
+  photos: MobilePhotos,
   skills: MobileSkills,
 }
 

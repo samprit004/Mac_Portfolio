@@ -31,11 +31,6 @@ const MailIcon = () => (
     <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z" />
   </svg>
 )
-const BasicInfoIcon = () => (
-  <svg viewBox="0 0 24 24" className="size-[18px] fill-current">
-    <path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm0 2c-4.42 0-8 2.24-8 5v1h16v-1c0-2.76-3.58-5-8-5Z" />
-  </svg>
-)
 const PhoneIcon = () => (
   <svg viewBox="0 0 24 24" className="size-[18px] fill-current">
     <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.61 21 3 13.39 3 4c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.58.11.35.03.74-.25 1.01l-2.2 2.2Z" />
@@ -77,42 +72,16 @@ const SocialButton = ({ href, icon, label, className, onClick, copied = false, a
   )
 }
 
-/* ── Mail compose panel (identical to desktop) ── */
-const MailComposePanel = ({ form, onChange, onSend }) => (
-  <div className="mt-8 flex flex-col" style={{ background: 'var(--window-content-bg)', color: 'var(--window-text)' }}>
-    <div className="border-y" style={{ borderColor: 'var(--window-divider)' }}>
-      <div className="grid grid-cols-[78px_minmax(0,1fr)] items-center px-6 py-2.5">
-        <span className="text-[13px] font-normal" style={{ color: 'var(--window-muted)' }}>To:</span>
-        <span className="text-[14px] font-medium" style={{ color: 'var(--window-text)' }}>sampritdas2004@gmail.com</span>
-      </div>
-      <div className="grid grid-cols-[78px_minmax(0,1fr)] items-center border-t px-6 py-2.5" style={{ borderColor: 'var(--window-divider)' }}>
-        <span className="text-[13px] font-normal" style={{ color: 'var(--window-muted)' }}>From:</span>
-        <input type="email" value={form.from} onChange={e => onChange('from', e.target.value)} placeholder="your@email.com" className="w-full border-none bg-transparent text-[14px] font-normal outline-none" style={{ color: 'var(--window-text)' }} />
-      </div>
-      <div className="grid grid-cols-[78px_minmax(0,1fr)] items-center border-t px-6 py-2.5" style={{ borderColor: 'var(--window-divider)' }}>
-        <span className="text-[13px] font-normal" style={{ color: 'var(--window-muted)' }}>Subject:</span>
-        <input type="text" value={form.subject} onChange={e => onChange('subject', e.target.value)} placeholder="Let's work together" className="w-full border-none bg-transparent text-[14px] font-normal outline-none" style={{ color: 'var(--window-text)' }} />
-      </div>
-    </div>
-    <div className="px-6 py-4">
-      <textarea value={form.body} onChange={e => onChange('body', e.target.value)} placeholder="Write your message here..." className="min-h-[200px] w-full resize-none border-none bg-transparent px-0 py-0 text-[14px] font-normal outline-none" style={{ color: 'var(--window-text)' }} />
-    </div>
-    <div className="sticky bottom-0 flex justify-end border-t px-6 py-3" style={{ borderColor: 'var(--window-divider)', background: 'var(--window-content-bg)' }}>
-      <button type="button" onClick={onSend} className="rounded-md bg-[#007aff] px-4 py-1.5 text-[13px] font-semibold text-white shadow-sm transition hover:brightness-95">Send</button>
-    </div>
-  </div>
-)
-
 /* ── Detail row (identical to desktop) ── */
 const DetailRow = ({ label, value, href, multiline = false, isLast = false }) => (
   <>
     <div className={`flex justify-center px-4 ${multiline ? 'py-3' : 'min-h-[10px] py-2'}`}>
-      <div className="grid w-full max-w-[360px] grid-cols-[120px_minmax(0,1fr)] items-center gap-x-3">
-        <span className="text-right text-sm font-normal capitalize" style={{ color: 'var(--window-muted)' }}>{label}</span>
+      <div className="grid w-full max-w-[392px] grid-cols-[102px_minmax(0,1fr)] items-center gap-x-2.5">
+        <span className="text-right text-[13px] font-normal capitalize" style={{ color: 'var(--window-muted)' }}>{label}</span>
         {href ? (
-          <a href={href} target="_blank" rel="noopener noreferrer" className="text-left text-[14px] font-semibold leading-[1.4] break-all" style={{ color: 'var(--window-text)' }}>{value}</a>
+          <a href={href} target="_blank" rel="noopener noreferrer" className="text-left text-[12.5px] font-semibold leading-[1.35] break-all" style={{ color: 'var(--window-text)' }}>{value}</a>
         ) : (
-          <span className={`text-left leading-[1.4] break-words ${multiline ? 'text-[14px]' : 'text-[14px] font-semibold'}`} style={{ color: 'var(--window-text)' }}>{value}</span>
+          <span className={`text-left leading-[1.35] ${multiline ? 'wrap-break-word text-[12.5px]' : 'text-[12.5px] font-semibold'}`} style={{ color: 'var(--window-text)' }}>{value}</span>
         )}
       </div>
     </div>
@@ -124,35 +93,19 @@ const DetailRow = ({ label, value, href, multiline = false, isLast = false }) =>
 const MobileContact = () => {
   const { push } = useMobileWindowStore()
   const [copiedPhone, setCopiedPhone] = useState(false)
-  const [activePanel, setActivePanel] = useState(null)
-  const [mailForm, setMailForm] = useState({ from: '', subject: '', body: '' })
 
   /* On mobile: open the native dialer instead of copying */
   const handleCall = () => {
     window.location.href = 'tel:+916291120228'
   }
 
-  const handleMailFieldChange = (field, value) => {
-    setMailForm(cur => ({ ...cur, [field]: value }))
-  }
-
-  const handleSendMail = () => {
-    const url = new URL('mailto:sampritdas2004@gmail.com')
-    if (mailForm.subject) url.searchParams.set('subject', mailForm.subject)
-    const bodyText = mailForm.from ? `From: ${mailForm.from}\n\n${mailForm.body}` : mailForm.body
-    if (bodyText) url.searchParams.set('body', bodyText)
-    window.location.href = url.toString()
-  }
-
   const handleSocialAction = (action) => {
-    if (action === 'details') { setActivePanel('details'); return }
     if (action === 'safari')  { push({ id: 'safari', title: 'Safari', component: 'safari', props: {} }); return }
-    if (action === 'mail')    { setActivePanel(cur => cur === 'mail' ? null : 'mail') }
+    if (action === 'gmail')   { push({ id: 'gmail', title: 'Gmail', component: 'gmail', props: {} }) }
   }
 
   const SOCIAL_LINKS = [
-    { label: 'Basic Info', action: 'details',     icon: <BasicInfoIcon />, className: 'bg-[#8e8e93] text-white hover:brightness-95' },
-    { label: 'Mail',       action: 'mail',        icon: <MailIcon />,      className: 'bg-[#3478f6] text-white hover:brightness-95' },
+    { label: 'Gmail',      action: 'gmail',       icon: <MailIcon />,      className: 'bg-[#3478f6] text-white hover:brightness-95' },
     { label: 'GitHub',     action: 'safari',      icon: <GHIcon />,        className: 'bg-[#24292e] text-white hover:brightness-95' },
     { label: 'LinkedIn',   href: 'https://linkedin.com/in/samprit-das', icon: <LIIcon />, className: 'bg-[#0a66c2] text-white hover:brightness-95' },
     { label: 'Call',       onClick: handleCall,   icon: <PhoneIcon />,     className: 'bg-[#34c759] text-white hover:brightness-95' },
@@ -181,23 +134,17 @@ const MobileContact = () => {
           <SocialButton
             key={link.label}
             {...link}
-            active={link.action === activePanel}
             copied={false}
             onClick={link.onClick ?? (link.action ? () => handleSocialAction(link.action) : undefined)}
           />
         ))}
       </div>
 
-      {/* Mail compose or detail rows */}
-      {activePanel === 'mail' ? (
-        <MailComposePanel form={mailForm} onChange={handleMailFieldChange} onSend={handleSendMail} />
-      ) : (
-        <div className="mx-auto mt-12 w-full max-w-[520px] shrink-0 px-[18px] pb-10" style={{ background: 'var(--window-content-bg)' }}>
-          {DETAIL_ROWS.map((row, i) => (
-            <DetailRow key={row.label} {...row} isLast={i === DETAIL_ROWS.length - 1} />
-          ))}
-        </div>
-      )}
+      <div className="mx-auto mt-12 w-full max-w-[520px] shrink-0 px-[18px] pb-10" style={{ background: 'var(--window-content-bg)' }}>
+        {DETAIL_ROWS.map((row, i) => (
+          <DetailRow key={row.label} {...row} isLast={i === DETAIL_ROWS.length - 1} />
+        ))}
+      </div>
     </div>
   )
 }

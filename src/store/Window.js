@@ -35,4 +35,11 @@ const useWindowStore = create(
 }))
 );
 
+useWindowStore.setState((state) => ({
+    windows: {
+        ...WINDOW_CONFIG,
+        ...state.windows,
+    },
+}));
+
 export default useWindowStore;

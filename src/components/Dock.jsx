@@ -29,6 +29,12 @@ const CONTACT_MOBILE_CONFIG = {
   activeTabId: null,
 }
 
+const PHOTOS_MOBILE_CONFIG = {
+  initialScreen: { id: 'photos', title: 'Gallery', component: 'photos', props: {} },
+  footerTabs: [],
+  activeTabId: null,
+}
+
 const MOBILE_DOCK_IDS = ['finder', 'safari', 'photos', 'contact']
 const mobileDockApps = dockApps.filter(app => MOBILE_DOCK_IDS.includes(app.id))
 
@@ -95,6 +101,7 @@ const Dock = ({ mobile = false }) => {
       finder:  FINDER_MOBILE_CONFIG,
       safari:  SAFARI_MOBILE_CONFIG,
       contact: CONTACT_MOBILE_CONFIG,
+      photos:  PHOTOS_MOBILE_CONFIG,
     }
 
     const handleMobileTap = (id) => {
