@@ -98,11 +98,19 @@ const navLinks = [
   export const experience = [
     {
       company: "Meru Technosoft Private Limited",
-      role: "Frontend Developer",
+      role: "Lead Frontend Developer",
       duration: "Jun 2025 - Dec 2025",
       location: "Gujarat, India",
       description:
         "Led frontend development of a scalable accounting platform using React and Tailwind CSS, building reusable component-based architectures and optimizing performance to improve workflows and accessibility.",
+    },
+    {
+      company: "Meru Technosoft Private Limited",
+      role: "Frontend Developer intern",
+      duration: "Dec 2025 - Present",
+      location: "Gujarat, India",
+      description:
+        "Developed and optimized modern frontend applications with scalable UI solutions, efficient state management, and seamless backend integration.",
     },
     {
       company: "Coding Jr.",
@@ -111,14 +119,6 @@ const navLinks = [
       location: "Remote",
       description:
         "Worked on AI-powered solutions and automation workflows, assisting in prompt engineering, model integrations, and building intelligent user-focused features for real-world applications.",
-    },
-    {
-      company: "Meru Technosoft Private Limited",
-      role: "Frontend Developer",
-      duration: "Dec 2025 - Present",
-      location: "Gujarat, India",
-      description:
-        "Developed and optimized modern frontend applications with scalable UI solutions, efficient state management, and seamless backend integration.",
     },
   ]
   export const achievements = [
@@ -470,7 +470,7 @@ const navLinks = [
         kind: "file",
         fileType: "img",
         position: "top-10 left-5",
-        imageUrl: "/images/adrian.jpg",
+        imageUrl: "/images/samprit-1.jpg",
       },
       {
         id: 2,
@@ -479,17 +479,17 @@ const navLinks = [
         kind: "file",
         fileType: "img",
         position: "top-28 right-72",
-        imageUrl: "/images/adrian-2.jpg",
+        imageUrl: "/images/samprit-2.jpg",
       },
-      {
-        id: 3,
-        name: "conference-me.png",
-        icon: "/images/image.png",
-        kind: "file",
-        fileType: "img",
-        position: "top-52 left-80",
-        imageUrl: "/images/adrian-3.jpeg",
-      },
+      // {
+      //   id: 3,
+      //   name: "conference-me.png",
+      //   icon: "/images/image.png",
+      //   kind: "file",
+      //   fileType: "img",
+      //   position: "top-52 left-80",
+      //   imageUrl: "/images/adrian-3.jpeg",
+      // },
       {
         id: 4,
         name: "about-me.txt",
@@ -498,14 +498,41 @@ const navLinks = [
         fileType: "txt",
         position: "top-60 left-5",
         subtitle: "Meet the Developer Behind the Code",
-        image: "/images/adrian.jpg",
+        image: "/images/samprit-1.jpg",
         description: [
-          "Hey! I’m Adrian 👋, a web developer who enjoys building sleek, interactive websites that actually work well.",
-          "I specialize in JavaScript, React, and Next.js—and I love making things feel smooth, fast, and just a little bit delightful.",
-          "I’m big on clean UI, good UX, and writing code that doesn’t need a search party to debug.",
-          "Outside of dev work, you'll find me tweaking layouts at 2AM, sipping overpriced coffee, or impulse-buying gadgets I absolutely convinced myself I needed 😅",
+          "Hey! I'm Samprit 👋, a Frontend Developer who enjoys turning ideas into clean, interactive web experiences.",
+          "I primarily work with JavaScript, React, Next.js, and modern frontend tools, focusing on building fast, responsive, and user-friendly applications.",
+          "I'm passionate about creating polished UI, improving user experience, and writing maintainable code that scales without becoming a headache.",
+          "Beyond coding, you'll usually find me refining my portfolio, exploring new web technologies, following football, or spending way too much time perfecting tiny design details that most people won't notice 😅",
         ],
       },
+      {
+        id: 5,
+        name: "Experience",
+        icon: "/images/plain.png",
+        kind: "file",
+        fileType: "timeline",
+        timelineType: "experience",
+        position: "top-10 left-5",
+      },
+      {
+        id: 6,
+        name: "Education",
+        icon: "/images/plain.png",
+        kind: "file",
+        fileType: "timeline",
+        timelineType: "education",
+        position: "top-28 right-72",
+      },
+      {
+        id: 7,
+        name: "Achievements",
+        icon: "/images/plain.png",
+        kind: "file",
+        fileType: "timeline",
+        timelineType: "achievements",
+        position: "top-52 left-80",
+      }
     ],
   };
   
@@ -573,6 +600,7 @@ const navLinks = [
     resume: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
     safari: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
     photos: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
+    timelinefile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
     terminal: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
     txtfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
     imgfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },

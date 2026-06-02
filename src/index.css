@@ -753,21 +753,32 @@ body {
     }
 
     .content {
-      @apply flex-1 p-8 bg-white max-w-2xl relative;
+      @apply flex-1 p-8 bg-white grid;
       background: var(--window-content-bg);
+      grid-template-columns: repeat(auto-fill, minmax(144px, 1fr));
+      grid-auto-rows: max-content;
+      align-content: start;
+      justify-items: center;
+      gap: 28px 18px;
+      overflow-y: auto;
 
-      li {
-        @apply absolute flex items-center flex-col gap-3;
+      .finder-grid-item {
+        @apply flex w-full items-center flex-col gap-3 cursor-pointer;
 
         img {
           @apply object-contain object-center size-16 relative group-hover:scale-105;
         }
 
         p {
-          @apply text-sm text-center font-medium w-40;
+          @apply text-sm text-center font-medium w-full max-w-40;
           color: var(--window-text);
         }
       }
+    }
+
+    .skills-content {
+      @apply flex-1 p-8 bg-white max-w-none overflow-y-auto;
+      background: var(--window-content-bg);
     }
   }
 
@@ -793,6 +804,24 @@ body {
 
     .file-description {
       color: var(--window-text);
+    }
+  }
+
+  #timelinefile {
+    @apply absolute top-28 right-18 overflow-hidden rounded-xl bg-white shadow-2xl drop-shadow-2xl;
+    width: min(860px, 72vw);
+    height: 640px;
+    background: var(--window-bg);
+    border: 1px solid var(--window-border);
+    box-shadow: var(--window-shadow);
+
+    h2 {
+      @apply w-full text-center text-sm font-bold;
+      color: var(--window-text);
+    }
+
+    .timeline-window-body {
+      height: calc(100% - 3rem);
     }
   }
 
@@ -858,6 +887,10 @@ body {
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
 
+    @media (max-width: 1023px) {
+      display: flex;
+    }
+
     /* let child buttons receive taps */
     & > * { pointer-events: auto; }
 
@@ -885,7 +918,7 @@ body {
     flex-direction: column;
     z-index: 10;
 
-    @media (max-width: 639px) {
+    @media (max-width: 1023px) {
       display: flex;
     }
   }
@@ -997,7 +1030,7 @@ body {
   /* ── Mobile dock (rendered by <Dock mobile /> inside MobileHomeScreen) ─── */
 
   .mobile-dock {
-    padding: 0 16px 28px;
+    padding: 0 16px 8px;
     flex-shrink: 0;
   }
 
@@ -1009,7 +1042,7 @@ body {
     background: var(--dock-bg);
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
-    border-radius: 28px;
+    border-radius: 16px;
     border: 0.5px solid var(--dock-divider);
   }
 
@@ -1037,11 +1070,56 @@ body {
       flex-shrink: 0;
     }
   }
+
+  @media (min-width: 640px) and (max-width: 1023px) {
+    #mobile-status-bar {
+      padding: 0 28px;
+    }
+
+    #mobile-home {
+      --mobile-icon-size: 56px;
+      padding: 0 22px 8px;
+    }
+
+    .mobile-content-area {
+      width: min(100%, 860px);
+      margin-inline: auto;
+    }
+
+    .mobile-welcome {
+      max-width: 760px;
+      padding: 0 28px;
+    }
+
+    .mobile-search-wrap {
+      width: fit-content;
+      margin-inline: auto;
+      padding-bottom: 14px;
+    }
+
+    .mobile-search-pill {
+      padding: 7px 20px;
+      font-size: 13px;
+    }
+
+    .mobile-dock {
+      width: fit-content;
+      margin-inline: auto;
+      padding: 0 0 8px;
+    }
+
+    .mobile-dock-inner {
+      justify-content: center;
+      gap: 18px;
+      padding: 8px 16px;
+      border-radius: 16px;
+    }
+  }
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
    Mobile Window System — MobileWindowWrapper + screens
-   Only active on < 640 px (sm breakpoint)
+   Active for touch layouts
    ══════════════════════════════════════════════════════════════════════════ */
 
 #mobile-window {
@@ -1054,7 +1132,7 @@ body {
   background: var(--window-bg);
   overflow: hidden;
 
-  @media (max-width: 639px) {
+  @media (max-width: 1023px) {
     display: flex;
   }
 }
@@ -1162,6 +1240,27 @@ body {
   }
 }
 
+@media (min-width: 640px) and (max-width: 1023px) {
+  #mobile-window {
+    padding-top: 36px;
+  }
+
+  .mob-win-nav,
+  .mob-win-content,
+  .mob-win-footer {
+    width: min(100%, 860px);
+    margin-inline: auto;
+  }
+
+  .mob-win-nav {
+    padding: 16px 18px 12px;
+  }
+
+  .mob-win-footer {
+    padding: 10px 24px 20px;
+  }
+}
+
 /* ── MobileFinder screen ── */
 
 .mob-finder {
@@ -1236,6 +1335,26 @@ body {
   max-width: 80px;
   word-break: break-word;
   font-family: "SF Pro Display", sans-serif;
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .mob-finder {
+    padding: 16px 20px 28px;
+  }
+
+  .mob-finder-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px 16px;
+  }
+
+  .mob-finder-icon {
+    width: 76px;
+    height: 76px;
+  }
+
+  .mob-finder-label {
+    max-width: 88px;
+  }
 }
 
 /* ── MobileProjectView screen ── */
@@ -1347,6 +1466,14 @@ body {
   }
 }
 
+.mob-timelinefile {
+  flex: 1;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar { width: 3px; }
+  &::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 2px; }
+}
+
 /* ── MobileImageFile screen ── */
 
 .mob-imagefile {
@@ -1361,6 +1488,18 @@ body {
   width: 100%;
   border-radius: 10px;
   object-fit: contain;
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .mob-imagefile {
+    padding: 24px;
+  }
+
+  .mob-imagefile-img {
+    max-width: 760px;
+    max-height: calc(100dvh - 150px);
+    margin: 0 auto;
+  }
 }
 
 /* ── MobileResume screen ── */

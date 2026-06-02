@@ -1,86 +1,10 @@
-import { useMemo, useRef } from 'react'
-import { useGSAP } from '@gsap/react'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useMemo } from 'react'
 import useMobileWindowStore from '#store/mobileWindow.js'
 import { buildTimelineGroups } from '#/windows/photos/timelineData.js'
 
-gsap.registerPlugin(ScrollTrigger)
-
 const MobilePhotos = () => {
   const { push } = useMobileWindowStore()
-  const scrollRef = useRef(null)
   const timelineGroups = useMemo(() => buildTimelineGroups(), [])
-
-  useGSAP(() => {
-    const scroller = scrollRef.current
-    if (!scroller) return
-
-    const groups = gsap.utils.toArray('[data-mobile-photo-group]', scroller)
-
-    groups.forEach((group) => {
-      const yearBlock = group.querySelector('[data-mobile-photo-year]')
-      const copyBlock = group.querySelector('[data-mobile-photo-copy]')
-      const tiles = group.querySelectorAll('[data-mobile-photo-tile]')
-
-      if (yearBlock) {
-        gsap.fromTo(
-          yearBlock,
-          { autoAlpha: 0, y: 18 },
-          {
-            autoAlpha: 1,
-            y: 0,
-            duration: 0.45,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: group,
-              scroller,
-              start: 'top 86%',
-              once: true,
-            },
-          }
-        )
-      }
-
-      if (copyBlock) {
-        gsap.fromTo(
-          copyBlock,
-          { autoAlpha: 0, y: 16 },
-          {
-            autoAlpha: 1,
-            y: 0,
-            duration: 0.42,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: group,
-              scroller,
-              start: 'top 86%',
-              once: true,
-            },
-          }
-        )
-      }
-
-      gsap.fromTo(
-        tiles,
-        { autoAlpha: 0, y: 20, scale: 0.94 },
-        {
-          autoAlpha: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.42,
-          ease: 'power2.out',
-          stagger: 0.05,
-          scrollTrigger: {
-            trigger: group,
-            scroller,
-            start: 'top 84%',
-            once: true,
-          },
-        }
-      )
-    })
-  }, [timelineGroups])
 
   const handleOpenImage = (item) => {
     push({
@@ -98,8 +22,7 @@ const MobilePhotos = () => {
 
   return (
     <div
-      ref={scrollRef}
-      className="flex h-full min-h-0 flex-col overflow-y-auto overflow-x-hidden px-4 pb-8 pt-4 font-['SF_Pro_Text','SF_Pro_Display','-apple-system','BlinkMacSystemFont','Segoe_UI',sans-serif]"
+      className="flex h-full min-h-0 flex-col overflow-y-auto overflow-x-hidden px-4 pb-8 pt-4 sm:px-5 sm:pb-9 sm:pt-4 font-['SF_Pro_Text','SF_Pro_Display','-apple-system','BlinkMacSystemFont','Segoe_UI',sans-serif]"
       style={{ background: 'var(--window-content-bg)', color: 'var(--window-text)' }}
     >
       <div className="space-y-7">
@@ -108,18 +31,17 @@ const MobilePhotos = () => {
           const showYear = !previousGroup || previousGroup.year !== group.year
 
           return (
-            <div key={group.id} data-mobile-photo-group>
+            <div key={group.id}>
               {showYear ? (
                 <div
-                  data-mobile-photo-year
-                  className="mb-3 text-[26px] font-bold leading-none tracking-[-0.5px] opacity-0"
+                  className="mb-3 text-[26px] font-bold leading-none tracking-[-0.5px]"
                   style={{ color: 'var(--contact-title)' }}
                 >
                   {group.year}
                 </div>
               ) : null}
 
-              <div data-mobile-photo-copy className="mb-3 flex items-center justify-between gap-3 opacity-0">
+              <div className="mb-3 flex items-center justify-between gap-3">
                 <div>
                   <p className="text-[14px] font-semibold tracking-[-0.08px]" style={{ color: 'var(--window-text)' }}>
                     {group.date}
@@ -133,9 +55,9 @@ const MobilePhotos = () => {
                 </span>
               </div>
 
-              <div className="grid grid-cols-3 gap-2.5">
+              <div className="grid grid-cols-3 gap-2.5 sm:grid-cols-4 sm:gap-3">
                 {group.items.map((item) => (
-                  <div key={item.id} data-mobile-photo-tile className="opacity-0">
+                  <div key={item.id}>
                     <button
                       type="button"
                       onClick={() => handleOpenImage(item)}

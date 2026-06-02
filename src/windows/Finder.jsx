@@ -82,7 +82,7 @@ const Finder = () => {
     ))
 
     const renderSkillsSection = () => (
-        <div className="content skills-content max-w-none overflow-y-auto">
+        <div className="skills-content">
             <div className="mx-auto flex max-w-4xl flex-col gap-5">
                 {groupedSkills.map(({ key, label, items }) => (
                     <section key={key} className="space-y-2">
@@ -146,7 +146,7 @@ const Finder = () => {
                 {activeLocation ?.children.map((item)=>(
                     <li 
                     key={item.id}
-                    className={item.position}
+                    className="finder-grid-item"
                     onClick={() => openItem(item)}>
                         <img src={item.icon} alt={item.name} />
                         <p>{item.name}</p>

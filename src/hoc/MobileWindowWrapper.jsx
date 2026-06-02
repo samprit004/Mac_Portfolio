@@ -9,6 +9,7 @@ import MobileContact from '../windows/mobile/screens/MobileContact.jsx'
 import MobileGmail from '../windows/mobile/screens/MobileGmail.jsx'
 import MobilePhotos from '../windows/mobile/screens/MobilePhotos.jsx'
 import MobileSkills from '../windows/mobile/screens/MobileSkills.jsx'
+import MobileTimelineFile from '../windows/mobile/screens/MobileTimelineFile.jsx'
 
 const SCREEN_MAP = {
   finder: MobileFinder,
@@ -21,6 +22,7 @@ const SCREEN_MAP = {
   gmail: MobileGmail,
   photos: MobilePhotos,
   skills: MobileSkills,
+  timelinefile: MobileTimelineFile,
 }
 
 const ChevronLeft = () => (

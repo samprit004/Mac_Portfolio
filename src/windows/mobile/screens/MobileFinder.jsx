@@ -12,7 +12,7 @@ const resumeShortcut = {
 const skillsShortcut = {
   id: 'skills-shortcut',
   name: 'Skills',
-  icon: '/icons/skills.svg',
+  icon: '/images/txt.png',
   kind: 'file',
   fileType: 'skills',
 }
@@ -49,6 +49,16 @@ const MobileFinder = ({ location = 'work' }) => {
 
     if (item.fileType === 'txt') {
       push({ id: `txt-${item.id}`, title: item.name, component: 'textfile', props: { file: item } })
+      return
+    }
+
+    if (item.fileType === 'timeline') {
+      push({
+        id: `timeline-${item.timelineType}`,
+        title: item.name,
+        component: 'timelinefile',
+        props: { file: item },
+      })
       return
     }
 

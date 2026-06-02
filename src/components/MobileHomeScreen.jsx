@@ -4,6 +4,7 @@ import { useGSAP } from '@gsap/react'
 import { Draggable } from 'gsap/Draggable'
 import { locations } from '#constants/index.js'
 import useMobileWindowStore from '#store/mobileWindow.js'
+import useDeviceMode from '#/hooks/useDeviceMode.js'
 import Dock from './Dock'
 
 /* ── Same font-weight animation as Welcome.jsx, adapted for touch ── */
@@ -77,11 +78,20 @@ const MOBILE_POS = {
   'resume-shortcut':'bottom-4 right-4',
 }
 
+const TABLET_POS = {
+  5: 'top-20 left-8',
+  6: 'top-20 right-8',
+  7: 'bottom-8 left-8',
+  'resume-shortcut': 'bottom-8 right-8',
+}
+
 /* ── Component ── */
 const MobileHomeScreen = () => {
   const { open: openMobileWindow } = useMobileWindowStore()
+  const { isTablet } = useDeviceMode()
   const titleRef    = useRef(null)
   const subtitleRef = useRef(null)
+  const iconPositions = isTablet ? TABLET_POS : MOBILE_POS
 
   const openMobileItem = (item) => {
     if (!item) return
@@ -160,7 +170,7 @@ const MobileHomeScreen = () => {
           <div
             key={item.id}
             data-mob-item={item.id}
-            className={`mob-folder group absolute flex flex-col items-center select-none ${MOBILE_POS[item.id] ?? 'top-[10vh] left-6'}`}
+            className={`mob-folder group absolute flex flex-col items-center select-none ${iconPositions[item.id] ?? 'top-[10vh] left-6'}`}
           >
             <img
               src={item.icon ?? '/images/folder.png'}

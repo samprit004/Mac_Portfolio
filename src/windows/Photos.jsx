@@ -1,88 +1,12 @@
-import { useMemo, useRef } from 'react'
-import { useGSAP } from '@gsap/react'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useMemo } from 'react'
 import WindowControls from '#/components/WindowControls'
 import WindowWrapper from '#/hoc/WindowWrapper'
 import useWindowStore from '#/store/Window'
 import { buildTimelineGroups } from './photos/timelineData.js'
 
-gsap.registerPlugin(ScrollTrigger)
-
 const Photos = () => {
   const { openWindow } = useWindowStore()
-  const scrollRef = useRef(null)
   const timelineGroups = useMemo(() => buildTimelineGroups(), [])
-
-  useGSAP(() => {
-    const scroller = scrollRef.current
-    if (!scroller) return
-
-    const groups = gsap.utils.toArray('[data-photo-group]', scroller)
-
-    groups.forEach((group) => {
-      const timelineBlock = group.querySelector('[data-photo-copy]')
-      const yearBlock = group.querySelector('[data-photo-year]')
-      const tiles = group.querySelectorAll('[data-photo-tile]')
-
-      if (yearBlock) {
-        gsap.fromTo(
-          yearBlock,
-          { autoAlpha: 0, y: 20 },
-          {
-            autoAlpha: 1,
-            y: 0,
-            duration: 0.55,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: group,
-              scroller,
-              start: 'top 82%',
-              once: true,
-            },
-          }
-        )
-      }
-
-      if (timelineBlock) {
-        gsap.fromTo(
-          timelineBlock,
-          { autoAlpha: 0, y: 18 },
-          {
-            autoAlpha: 1,
-            y: 0,
-            duration: 0.5,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: group,
-              scroller,
-              start: 'top 82%',
-              once: true,
-            },
-          }
-        )
-      }
-
-      gsap.fromTo(
-        tiles,
-        { autoAlpha: 0, y: 24, scale: 0.94 },
-        {
-          autoAlpha: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.45,
-          ease: 'power2.out',
-          stagger: 0.06,
-          scrollTrigger: {
-            trigger: group,
-            scroller,
-            start: 'top 80%',
-            once: true,
-          },
-        }
-      )
-    })
-  }, [timelineGroups])
 
   const handleOpenImage = (item) => {
     openWindow('imgfile', {
@@ -111,7 +35,6 @@ const Photos = () => {
 
       <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
         <div
-          ref={scrollRef}
           className="min-h-0 flex-1 overflow-y-auto px-5 py-5"
           style={{ background: 'var(--window-content-bg)', scrollBehavior: 'smooth' }}
         >
@@ -121,11 +44,10 @@ const Photos = () => {
               const showYear = !previousGroup || previousGroup.year !== group.year
 
               return (
-                <div key={group.id} data-photo-group>
+                <div key={group.id}>
                   {showYear ? (
                     <div
-                      data-photo-year
-                      className="mb-3 text-[28px] font-bold leading-none tracking-[-0.6px] opacity-0"
+                      className="mb-3 text-[28px] font-bold leading-none tracking-[-0.6px]"
                       style={{ color: 'var(--contact-title)' }}
                     >
                       {group.year}
@@ -133,7 +55,7 @@ const Photos = () => {
                   ) : null}
 
                   <section className="space-y-4">
-                    <div data-photo-copy className="flex items-center justify-between gap-4 opacity-0">
+                    <div className="flex items-center justify-between gap-4">
                       <div>
                         <p className="text-[15px] font-semibold tracking-[-0.1px]" style={{ color: 'var(--window-text)' }}>
                           {group.date}
@@ -149,7 +71,7 @@ const Photos = () => {
 
                     <div className="grid grid-cols-4 gap-3">
                       {group.items.map((item) => (
-                        <div key={item.id} data-photo-tile className="opacity-0">
+                        <div key={item.id}>
                           <button
                             type="button"
                             onClick={() => handleOpenImage(item)}

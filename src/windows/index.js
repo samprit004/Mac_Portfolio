@@ -7,5 +7,6 @@ import ImageFile from './ImageFile.jsx'
 import Contact from './Contact.jsx'
 import Gmail from './Gmail.jsx'
 import Photos from './Photos.jsx'
+import TimelineFile from './TimelineFile.jsx'
 
-export { Terminal, Safari, Resume, Finder, Text, ImageFile, Contact, Gmail, Photos }
+export { Terminal, Safari, Resume, Finder, Text, ImageFile, Contact, Gmail, Photos, TimelineFile }

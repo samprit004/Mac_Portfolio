@@ -117,7 +117,7 @@ const MobileContact = () => {
       style={{ background: 'var(--window-content-bg)', color: 'var(--window-text)' }}
     >
       {/* Profile hero */}
-      <div className="mx-auto flex w-full max-w-[520px] shrink-0 items-center justify-center gap-5 px-[18px] pt-7 text-left">
+      <div className="mx-auto flex w-full max-w-[520px] shrink-0 items-center justify-center gap-5 px-[18px] pt-7 text-left sm:max-w-[620px] sm:px-5">
         <img src="https://github.com/samprit004.png" alt="Samprit Das" className="size-[84px] rounded-full border border-black/10 object-cover shadow-sm" />
         <div className="flex min-w-0 flex-col justify-center">
           <h1 className="text-[24px] font-bold leading-tight tracking-[-0.35px]" style={{ color: 'var(--contact-title)' }}>Samprit Das</h1>
@@ -129,7 +129,7 @@ const MobileContact = () => {
       </div>
 
       {/* Social action buttons */}
-      <div className="mx-auto flex w-full max-w-[520px] shrink-0 justify-center gap-4 px-[18px] pb-4 pt-[28px]">
+      <div className="mx-auto flex w-full max-w-[520px] shrink-0 justify-center gap-4 px-[18px] pb-4 pt-[28px] sm:max-w-[620px] sm:px-5">
         {SOCIAL_LINKS.map((link) => (
           <SocialButton
             key={link.label}
@@ -140,7 +140,7 @@ const MobileContact = () => {
         ))}
       </div>
 
-      <div className="mx-auto mt-12 w-full max-w-[520px] shrink-0 px-[18px] pb-10" style={{ background: 'var(--window-content-bg)' }}>
+      <div className="mx-auto mt-12 w-full max-w-[520px] shrink-0 px-[18px] pb-10 sm:max-w-[620px] sm:px-5" style={{ background: 'var(--window-content-bg)' }}>
         {DETAIL_ROWS.map((row, i) => (
           <DetailRow key={row.label} {...row} isLast={i === DETAIL_ROWS.length - 1} />
         ))}
