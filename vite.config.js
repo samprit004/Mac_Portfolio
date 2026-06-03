@@ -11,12 +11,12 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: [
-      { find: /^#components\/(.*)$/, replacement: `${path.resolve(rootDir, 'src/components')}/$1` },
-      { find: /^#constants\/(.*)$/, replacement: `${path.resolve(rootDir, 'src/constants')}/$1` },
-      { find: /^#store\/(.*)$/, replacement: `${path.resolve(rootDir, 'src/store')}/$1` },
-      { find: /^#hoc\/(.*)$/, replacement: `${path.resolve(rootDir, 'src/hoc')}/$1` },
-      { find: /^#windows\/(.*)$/, replacement: `${path.resolve(rootDir, 'src/windows')}/$1` },
-      { find: /^#\/(.*)$/, replacement: `${path.resolve(rootDir, 'src')}/$1` },
+      { find: '#components', replacement: path.resolve(rootDir, 'src/components') },
+      { find: '#constants', replacement: path.resolve(rootDir, 'src/constants') },
+      { find: '#store', replacement: path.resolve(rootDir, 'src/store') },
+      { find: '#hoc', replacement: path.resolve(rootDir, 'src/hoc') },
+      { find: '#windows', replacement: path.resolve(rootDir, 'src/windows') },
+      { find: '#/', replacement: `${path.resolve(rootDir, 'src')}/` },
     ],
   },
 })

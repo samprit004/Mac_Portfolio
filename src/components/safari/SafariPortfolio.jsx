@@ -1,0 +1,32 @@
+import useSafariStore from "#/store/safari/safariStore";
+import SafariHeader from "./SafariHeader";
+import GitHubProfile from "#/components/profiles/github/GitHubProfile";
+
+const SafariPortfolio = () => {
+  const activeTab = useSafariStore((s) => s.activeTab);
+
+  return (
+    <div className="flex flex-col h-full" style={{ background: "var(--window-bg)", color: "var(--window-text)" }}>
+      <SafariHeader />
+      <div
+        key={activeTab}
+        className="flex-1 overflow-y-auto overflow-x-hidden"
+        style={{
+          animation: "safFade 0.12s ease",
+          touchAction: "pan-y",
+          WebkitOverflowScrolling: "touch",
+        }}
+      >
+        <GitHubProfile />
+      </div>
+      <style>{`
+        @keyframes safFade {
+          from { opacity: 0; }
+          to   { opacity: 1; }
+        }
+      `}</style>
+    </div>
+  );
+};
+
+export default SafariPortfolio;

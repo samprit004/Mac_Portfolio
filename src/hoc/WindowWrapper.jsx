@@ -1,5 +1,6 @@
 import React, { useLayoutEffect, useRef } from 'react'
 import useWindowStore from '#store/Window.js'
+import { INITIAL_Z_INDEX } from '#constants/index.js'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { Draggable } from 'gsap/Draggable'
@@ -8,7 +9,8 @@ const WindowWrapper = (Component, windowKey) => {
 
     const Wrapped = (props) => {
         const {focusWindow, windows} = useWindowStore();
-        const {isOpen, zIndex} = windows[windowKey];
+        const windowState = windows[windowKey] ?? { isOpen: false, zIndex: INITIAL_Z_INDEX };
+        const {isOpen, zIndex} = windowState;
         const ref = useRef(null);
 
         useGSAP(() => {
@@ -28,15 +30,62 @@ const WindowWrapper = (Component, windowKey) => {
             el.style.display = isOpen ? 'block' : 'none';
         },[isOpen])
 
+        useLayoutEffect(() => {
+            const el = ref.current;
+            if (!el) return;
+
+            const focusOnPointerCapture = () => {
+                if (!isOpen) return;
+                focusWindow(windowKey);
+            };
+
+            el.addEventListener('pointerdown', focusOnPointerCapture, true);
+            el.addEventListener('mousedown', focusOnPointerCapture, true);
+
+            return () => {
+                el.removeEventListener('pointerdown', focusOnPointerCapture, true);
+                el.removeEventListener('mousedown', focusOnPointerCapture, true);
+            };
+        }, [focusWindow, isOpen, windowKey])
+
         useGSAP(() => {
             const el = ref.current;
             if(!el) return;
+            const dragHandle =
+                el.querySelector('[data-window-drag-handle="true"]') ||
+                el.querySelector('#window-header') ||
+                el.querySelector('.terminal-header');
 
-            const [instance] = Draggable.create(el, {onpress: () => focusWindow(windowKey)});
+            if (dragHandle) {
+                dragHandle.style.touchAction = 'none';
+            }
+
+            const [instance] = Draggable.create(el, {
+                trigger: dragHandle ?? el,
+                // Disable GSAP's built-in z-index boost — it uses an internal
+                // counter that produces values far below our React-managed range
+                // (1001+), causing pressed windows to sink behind others.
+                // We manage z-index entirely through focusWindow/openWindow.
+                zIndexBoost: false,
+                onPress: function() {
+                    // Bring this window to front on every press.
+                    // Safe to call unconditionally because onpress fires on
+                    // pointerdown, which is always before the click event that
+                    // triggers React's onClick / openWindow for any child window.
+                    // So if a child opens (onClick → openWindow), it runs AFTER
+                    // this focusWindow call and receives topZ+1, landing on top.
+                    focusWindow(windowKey);
+                },
+            });
             return () => instance.kill();
         },[])
 
-        return( <section id={windowKey} ref={ref} style={{zIndex, display: 'none'}} className="absolute">
+        return( <section
+            id={windowKey}
+            ref={ref}
+            style={{zIndex, display: 'none'}}
+            className="absolute"
+        >
             <Component {...props} />
         </section>
         )
