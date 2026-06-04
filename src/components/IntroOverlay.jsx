@@ -82,6 +82,7 @@ export default function IntroOverlay() {
 
   return (
     <div ref={overlayRef} id="intro-overlay" role="presentation" aria-hidden="true">
+      <div className="intro-backdrop" />
       <div ref={glassRef} className="intro-glass">
         <div className="intro-glass-highlight" />
         <div ref={animRef} className="intro-animation-wrap intro-animation" />
