@@ -9,6 +9,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 ).toString()
 
 const PAGE_WIDTH = Math.min(window.innerWidth, 640)
+const RESUME_FILE = '/files/Samprit_detailed_cv.pdf'
 
 const ResumeSkeleton = () => (
   <div className="mob-resume-skeleton">
@@ -35,7 +36,7 @@ const MobileResume = () => {
   return (
     <div className="mob-resume-pdf">
       <Document
-        file="/files/2026_job.pdf"
+        file={RESUME_FILE}
         loading={<ResumeSkeleton />}
         onLoadSuccess={({ numPages }) => setNumPages(numPages)}
       >

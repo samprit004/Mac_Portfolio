@@ -1,6 +1,9 @@
 import WindowControls from '#/components/WindowControls'
 import WindowWrapper from '#/hoc/WindowWrapper'
 import useWindowStore from '#/store/Window'
+import { marked } from 'marked'
+
+marked.setOptions({ gfm: true, breaks: true })
 
 const Text = () => {
   const { windows } = useWindowStore();
@@ -25,7 +28,15 @@ const Text = () => {
           <p className="file-subtitle text-xs font-medium uppercase tracking-widest">{subtitle}</p>
         )}
         {description?.map((para, i) => (
-          <p key={i} className="file-description text-sm leading-relaxed">{para}</p>
+          para?.trim()
+            ? (
+                <div
+                  key={i}
+                  className="file-description text-sm leading-relaxed"
+                  dangerouslySetInnerHTML={{ __html: marked.parseInline(para) }}
+                />
+              )
+            : <div key={i} className="h-1" />
         ))}
       </div>
     </>

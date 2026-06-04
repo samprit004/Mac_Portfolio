@@ -13,6 +13,7 @@
     "@fontsource/georama": "^5.2.8",
     "@fontsource/poppins": "^5.2.7",
     "@gsap/react": "^2.1.2",
+    "@supabase/supabase-js": "^2.107.0",
     "@tailwindcss/vite": "^4.3.0",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.20",

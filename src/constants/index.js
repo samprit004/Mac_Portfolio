@@ -348,13 +348,25 @@ const navLinks = [
             kind: "file",
             fileType: "txt",
             position: "top-5 left-5",
-            description: [
-              "Pocket Legal Aid is an AI-powered legal awareness platform built to simplify access to constitutional knowledge and legal guidance.",
-              "By combining interactive learning modules with an intelligent chatbot, it helps users understand their rights and find relevant legal information with ease.",
-              "Think of it as a digital legal assistant—making legal awareness more accessible, intuitive, and user-friendly.",
-              "The solution's innovative use of Generative AI earned our team the Best GenAI Hack Track award, showcasing its impact and real-world potential.",
-              "Built with React, Flask, Firebase, and Gemini API, it provides a fast, seamless, and responsive experience across desktop and mobile devices.",
-            ],              
+           
+
+description: [
+  "<span style='display:inline-block;font-size:1.5rem;font-weight:700;line-height:1.2;padding-bottom:0.35rem;border-bottom:2px solid var(--window-divider);'>Problem Statement</span>",
+  "Despite having access to constitutional rights and legal protections, a significant portion of the population lacks **proper legal awareness and guidance**. This knowledge gap often leaves individuals vulnerable to **misinformation, exploitation, and injustice**. Furthermore, traditional legal resources are often **complex, difficult to navigate, and inaccessible** to the average citizen, creating the need for a more engaging and user-friendly approach to legal education.",
+
+  "<span style='display:inline-block;font-size:1.5rem;font-weight:700;line-height:1.2;padding-bottom:0.35rem;border-bottom:2px solid var(--window-divider);'>Our Solution</span>",
+  "To address this challenge, we developed **Pocket Legal Aid**, an **AI-powered legal awareness platform** designed to make constitutional knowledge accessible to everyone. By combining **gamified learning experiences**, **interactive modules**, and an **intelligent chatbot**, the platform enables users to understand their rights and discover relevant legal information in a structured and intuitive manner. Acting as a **digital legal companion**, it simplifies legal education and encourages users to actively learn about the constitution.",
+
+  "<span style='display:inline-block;font-size:1.5rem;font-weight:700;line-height:1.2;padding-bottom:0.35rem;border-bottom:2px solid var(--window-divider);'>Results &amp; Impact</span>",
+  "The platform was launched with **100+ constitutional resources** and AI-assisted chatbot capabilities to enhance accessibility and user engagement. We implemented **contextual search using n-gram models**, resulting in a **40% improvement in search relevance** and enabling users to retrieve more accurate information. This project helped me win the **GenAI Track at the Diversion 2025 Hackathon**, where our team earned the **MLH Best GenAI Hack Track Award at Diversion 2K25, Kolkata**.",
+
+  "<span style='display:inline-block;font-size:1.5rem;font-weight:700;line-height:1.2;padding-bottom:0.35rem;border-bottom:2px solid var(--window-divider);'>Tech Stack</span>",
+  "**Pocket Legal Aid** was built by a team of **4 members** using **React, Flask, Firebase, Gemini API, Hugging Face, OpenStreetMap, Tailwind CSS, Figma, and Ngrok**. The architecture delivers a **fast, responsive, and seamless experience** across both desktop and mobile devices."
+]
+
+
+
+             
           },
           {
             id: 2,
@@ -402,13 +414,22 @@ const navLinks = [
             kind: "file",
             fileType: "txt",
             position: "top-5 right-10",
-            description: [
-              "Marg Sathi is an AI-powered project management platform created for Smart India Hackathon 2024 to modernize the management of S&T and R&D coal projects.",
-              "By replacing manual processes with a centralized system for real-time tracking and AI-driven assessments, it helped streamline workflows and improve decision-making.",
-              "Think of it as a digital command center—bringing project data, reporting, and insights together in one place.",
-              "The solution was recognized nationally, earning a place among the finalists of Smart India Hackathon 2024.",
-              "Built with Next.js and Tailwind CSS, it provides a fast, responsive, and intuitive experience across all devices.",
-              ],
+           
+description: [
+  "<span style='display:inline-block;font-size:1.5rem;font-weight:700;line-height:1.2;padding-bottom:0.35rem;border-bottom:2px solid var(--window-divider);'>Problem Statement</span>",
+  "As part of a **Ministry of Coal** problem statement for **Smart India Hackathon 2024 (7th Edition)**, we identified that the management of **S&T and R&D coal projects** relied heavily on **manual processes, paperwork, and fragmented data management**. Tracking project progress, generating reports, and coordinating information across multiple stakeholders were tedious and time-consuming tasks, often leading to inefficiencies and delays in decision-making. There was a clear need for a **centralized digital solution** capable of modernizing project management workflows.",
+
+  "<span style='display:inline-block;font-size:1.5rem;font-weight:700;line-height:1.2;padding-bottom:0.35rem;border-bottom:2px solid var(--window-divider);'>Our Solution</span>",
+  "To address these challenges, we developed **Marg Sathi**, an **AI-powered project management platform** designed specifically for managing **Science & Technology and R&D coal projects**. The platform transformed traditional pen-and-paper operations into a **centralized digital ecosystem**, enabling real-time project tracking, AI-assisted assessments, and streamlined reporting workflows. By integrating intuitive dashboards and data visualization capabilities, the system provided stakeholders with a unified view of project progress and insights, making management more efficient and data-driven.",
+
+  "<span style='display:inline-block;font-size:1.5rem;font-weight:700;line-height:1.2;padding-bottom:0.35rem;border-bottom:2px solid var(--window-divider);'>Results & Impact</span>",
+  "Marg Sathi successfully digitized the management of **100+ coal projects**, significantly improving operational efficiency. The implementation of centralized dashboards and visual analytics enhanced **decision-making efficiency by 70%**, while automated reporting workflows reduced **manual effort by 80%**. The solution's practical impact and innovation led our team to become **Finalists of Smart India Hackathon 2024 (7th Edition)**, earning national-level recognition for addressing a real-world challenge posed by the **Ministry of Coal**.",
+
+  "<span style='display:inline-block;font-size:1.5rem;font-weight:700;line-height:1.2;padding-bottom:0.35rem;border-bottom:2px solid var(--window-divider);'>Tech Stack</span>",
+  "**Marg Sathi** was developed by a team of **5 members** using **Next.js, Tailwind CSS, PocketBase, MongoDB, Gemini, and Figma**. The architecture delivers a **fast, responsive, and intuitive experience**, enabling seamless access to project data and analytics across different devices and stakeholders."
+]
+
+
               
           },
           {
@@ -457,13 +478,22 @@ const navLinks = [
             kind: "file",
             fileType: "txt",
             position: "top-5 left-10",
-            description: [
-              "This freelance portfolio website was crafted for a client to showcase their work with a premium and modern online presence.",
-              "Instead of a static portfolio, it delivers an engaging experience through smooth GSAP animations, polished components, and thoughtfully designed interactions.",
-              "Think of it as a digital showcase—combining aesthetics and functionality to leave a lasting impression on visitors.",
-              "Built with React and Tailwind CSS, the site features responsive layouts, modern UI components, and seamless animations, while Supabase powers the backend and database for efficient content management.",
-              "The result is a fast, visually striking, and highly customizable portfolio experience across desktop and mobile devices.",
-              ],
+           
+description: [
+  "<span style='display:inline-block;font-size:1.5rem;font-weight:700;line-height:1.2;padding-bottom:0.35rem;border-bottom:2px solid var(--window-divider);'>Problem Statement</span>",
+  "As a **creative designer**, the client required a portfolio that could do more than simply showcase projects. The challenge was to create a digital presence that truly reflected her **personality, creativity, and design philosophy**, while presenting her work in a way that would leave a lasting impression on potential employers and collaborators. A conventional portfolio lacked the visual identity and engaging experience needed to represent the unique value she brings to the table.",
+
+  "<span style='display:inline-block;font-size:1.5rem;font-weight:700;line-height:1.2;padding-bottom:0.35rem;border-bottom:2px solid var(--window-divider);'>Our Solution</span>",
+  "To address this, I designed and developed a **premium and modern portfolio experience** tailored specifically to the client's creative style and professional aspirations. Instead of building a static website, I focused on creating an immersive experience through **smooth GSAP animations**, **interactive components**, and carefully crafted UI elements. Every section was designed with the goal of highlighting her work while maintaining a visual language that resonated with her personality and artistic vision.",
+
+  "<span style='display:inline-block;font-size:1.5rem;font-weight:700;line-height:1.2;padding-bottom:0.35rem;border-bottom:2px solid var(--window-divider);'>Results & Impact</span>",
+  "The final product delivered a **fast, visually striking, and fully responsive portfolio** that effectively showcases the client's work across desktop and mobile devices. By combining aesthetics with usability, the website provides an engaging experience for visitors while establishing a strong professional identity. The portfolio now serves as a centralized platform for presenting her projects and strengthening her online presence as a creative professional.",
+
+  "<span style='display:inline-block;font-size:1.5rem;font-weight:700;line-height:1.2;padding-bottom:0.35rem;border-bottom:2px solid var(--window-divider);'>Tech Stack</span>",
+  "The website was built using **React, Tailwind CSS, GSAP, and Supabase**, enabling smooth animations, modern UI components, and efficient backend functionality. The architecture ensures a **responsive, high-performance, and easily customizable experience**, allowing the client to manage and showcase her work seamlessly."
+]
+
+
               
           },
           {

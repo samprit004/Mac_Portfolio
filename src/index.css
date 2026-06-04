@@ -709,6 +709,19 @@ body {
       &::-webkit-scrollbar { width: 4px; }
       &::-webkit-scrollbar-track { background: transparent; }
       &::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.14); border-radius: 2px; }
+
+      .react-pdf__Document,
+      .react-pdf__Page,
+      .react-pdf__Page canvas {
+        width: 100% !important;
+        height: auto !important;
+      }
+    }
+
+    .resume-page {
+      & + & {
+        border-top: 2px solid var(--window-header-border);
+      }
     }
   }
 
@@ -1565,11 +1578,20 @@ body {
   &::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 2px; }
 
   /* react-pdf canvas fills the container width */
-  .react-pdf__Document,
+  .react-pdf__Document {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
   .react-pdf__Page,
   .react-pdf__Page canvas {
     width: 100% !important;
     height: auto !important;
+  }
+
+  .react-pdf__Page {
+    margin: 0 !important;
   }
 }
 

@@ -1,3 +1,7 @@
+import { marked } from 'marked'
+
+marked.setOptions({ gfm: true, breaks: true })
+
 const MobileTextFile = ({ file }) => {
   const lines = file?.description ?? []
 
@@ -11,7 +15,14 @@ const MobileTextFile = ({ file }) => {
       )}
       <div className="mob-textfile-body">
         {lines.map((line, i) => (
-          <p key={i}>{line}</p>
+          line?.trim()
+            ? (
+                <div
+                  key={i}
+                  dangerouslySetInnerHTML={{ __html: marked.parseInline(line) }}
+                />
+              )
+            : <div key={i} className="h-1" />
         ))}
       </div>
     </div>

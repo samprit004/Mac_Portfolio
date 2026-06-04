@@ -1,6 +1,5 @@
 import { useState } from 'react'
-
-const RECIPIENT_EMAIL = 'sampritdas2004@gmail.com'
+import { RECIPIENT_EMAIL, isValidEmail, saveContactMessage } from '#/services/contact/saveContactMessage.js'
 
 const MobileGmail = () => {
   const [form, setForm] = useState({
@@ -8,28 +7,45 @@ const MobileGmail = () => {
     subject: '',
     body: '',
   })
+  const [sendState, setSendState] = useState({
+    status: 'idle',
+    message: '',
+  })
+  const trimmedFrom = form.from.trim()
+  const trimmedSubject = form.subject.trim()
+  const isFromValid = isValidEmail(trimmedFrom)
+  const canSend = isFromValid && trimmedSubject.length > 0
 
   const handleFieldChange = (field, value) => {
+    if (sendState.status !== 'idle') {
+      setSendState({ status: 'idle', message: '' })
+    }
     setForm((current) => ({ ...current, [field]: value }))
   }
 
-  const handleSend = () => {
-    const mailtoUrl = new URL(`mailto:${RECIPIENT_EMAIL}`)
+  const handleSend = async () => {
+    if (!canSend || sendState.status === 'sending') return
 
-    if (form.subject) {
-      mailtoUrl.searchParams.set('subject', form.subject)
+    try {
+      setSendState({ status: 'sending', message: 'Saving message...' })
+      await saveContactMessage({
+        from: form.from,
+        subject: form.subject,
+        body: form.body,
+        sentFrom: 'mobile',
+      })
+      setForm({
+        from: '',
+        subject: '',
+        body: '',
+      })
+      setSendState({ status: 'success', message: 'Message saved successfully.' })
+    } catch (error) {
+      setSendState({
+        status: 'error',
+        message: error?.message ? `Save failed: ${error.message}` : 'Failed to save message.',
+      })
     }
-
-    if (form.body) {
-      const bodyText = form.from
-        ? `From: ${form.from}\n\n${form.body}`
-        : form.body
-      mailtoUrl.searchParams.set('body', bodyText)
-    } else if (form.from) {
-      mailtoUrl.searchParams.set('body', `From: ${form.from}`)
-    }
-
-    window.location.href = mailtoUrl.toString()
   }
 
   return (
@@ -49,23 +65,29 @@ const MobileGmail = () => {
           />
         </div>
         <div className="grid grid-cols-[78px_minmax(0,1fr)] items-center border-t px-6 py-2.5" style={{ borderColor: 'var(--window-divider)' }}>
-          <span className="text-[13px] font-normal" style={{ color: 'var(--window-muted)' }}>From:</span>
+          <span className="text-[13px] font-normal" style={{ color: 'var(--window-muted)' }}>
+            From: <span style={{ color: '#ff3b30' }}>*</span>
+          </span>
           <input
             type="email"
             value={form.from}
             onChange={(event) => handleFieldChange('from', event.target.value)}
             placeholder="your@email.com"
+            aria-invalid={trimmedFrom.length > 0 && !isFromValid}
             className="w-full border-none bg-transparent text-[14px] font-normal outline-none"
             style={{ color: 'var(--window-text)' }}
           />
         </div>
         <div className="grid grid-cols-[78px_minmax(0,1fr)] items-center border-t px-6 py-2.5" style={{ borderColor: 'var(--window-divider)' }}>
-          <span className="text-[13px] font-normal" style={{ color: 'var(--window-muted)' }}>Subject:</span>
+          <span className="text-[13px] font-normal" style={{ color: 'var(--window-muted)' }}>
+            Subject: <span style={{ color: '#ff3b30' }}>*</span>
+          </span>
           <input
             type="text"
             value={form.subject}
             onChange={(event) => handleFieldChange('subject', event.target.value)}
             placeholder="Let’s work together"
+            aria-invalid={trimmedSubject.length === 0}
             className="w-full border-none bg-transparent text-[14px] font-normal outline-none"
             style={{ color: 'var(--window-text)' }}
           />
@@ -83,12 +105,32 @@ const MobileGmail = () => {
       </div>
 
       <div className="flex shrink-0 justify-end border-t px-6 py-3" style={{ borderColor: 'var(--window-divider)', background: 'var(--window-content-bg)' }}>
+        <div className="mr-auto flex items-center">
+          {sendState.message ? (
+            <p
+              className="text-[12px] font-medium"
+              style={{
+                color:
+                  sendState.status === 'error'
+                    ? '#ff3b30'
+                    : sendState.status === 'success'
+                      ? '#16a34a'
+                      : 'var(--window-muted)',
+              }}
+              aria-live="polite"
+            >
+              {sendState.message}
+            </p>
+          ) : null}
+        </div>
         <button
           type="button"
           onClick={handleSend}
-          className="rounded-md bg-[#007aff] px-4 py-1.5 text-[13px] font-semibold text-white shadow-sm transition hover:brightness-95"
+          disabled={!canSend || sendState.status === 'sending'}
+          className="rounded-md px-4 py-1.5 text-[13px] font-semibold text-white shadow-sm transition disabled:cursor-not-allowed disabled:opacity-50"
+          style={{ background: canSend ? '#007aff' : 'color-mix(in srgb, #007aff 42%, #94a3b8 58%)' }}
         >
-          Send
+          {sendState.status === 'sending' ? 'Saving...' : 'Send'}
         </button>
       </div>
     </div>
