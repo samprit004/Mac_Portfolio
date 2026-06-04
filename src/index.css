@@ -135,6 +135,10 @@ body {
   z-index: 6000;
   overflow: hidden;
   pointer-events: auto;
+  background: rgba(210, 226, 248, 0.07);
+  backdrop-filter: blur(24px) saturate(145%);
+  -webkit-backdrop-filter: blur(24px) saturate(145%);
+  isolation: isolate;
 }
 
 .intro-glass {
@@ -144,11 +148,11 @@ body {
   align-items: center;
   justify-content: center;
   background:
-    radial-gradient(circle at 50% 22%, rgba(139, 203, 255, 0.28), transparent 34%),
-    linear-gradient(180deg, rgba(224, 242, 255, 0.28) 0%, rgba(188, 226, 255, 0.12) 38%, rgba(115, 174, 255, 0.08) 100%),
+    radial-gradient(circle at 50% 22%, rgba(139, 203, 255, 0.22), transparent 34%),
+    linear-gradient(180deg, rgba(224, 242, 255, 0.18) 0%, rgba(188, 226, 255, 0.1) 38%, rgba(115, 174, 255, 0.08) 100%),
     rgba(26, 56, 110, 0.16);
-  backdrop-filter: blur(22px) saturate(150%);
-  -webkit-backdrop-filter: blur(22px) saturate(150%);
+  backdrop-filter: blur(34px) saturate(165%);
+  -webkit-backdrop-filter: blur(34px) saturate(165%);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.25),
     inset 0 -1px 0 rgba(255, 255, 255, 0.08);
@@ -158,8 +162,8 @@ body {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 50% 28%, rgba(196, 229, 255, 0.36), transparent 40%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent 28%);
+    radial-gradient(circle at 50% 28%, rgba(196, 229, 255, 0.2), transparent 38%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 24%);
   pointer-events: none;
 }
 
@@ -183,11 +187,17 @@ body {
 }
 
 :root[data-theme='dark'] {
+  #intro-overlay {
+    background: rgba(4, 10, 24, 0.2);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+  }
+
   .intro-glass {
     background:
-      radial-gradient(circle at 50% 24%, rgba(96, 165, 250, 0.18), transparent 36%),
-      linear-gradient(180deg, rgba(107, 165, 255, 0.09) 0%, rgba(56, 111, 212, 0.05) 38%, rgba(255, 255, 255, 0.02) 100%),
-      rgba(2, 10, 28, 0.42);
+      radial-gradient(circle at 50% 24%, rgba(96, 165, 250, 0.24), transparent 38%),
+      linear-gradient(180deg, rgba(107, 165, 255, 0.12) 0%, rgba(56, 111, 212, 0.08) 38%, rgba(255, 255, 255, 0.03) 100%),
+      rgba(2, 10, 28, 0.54);
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.12),
       inset 0 -1px 0 rgba(255, 255, 255, 0.04);
