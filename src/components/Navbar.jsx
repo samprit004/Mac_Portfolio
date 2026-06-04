@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
 
 import { navLinks, navIcons } from '#constants/index.js'
@@ -9,19 +9,25 @@ const Navbar = () => {
 
   const {openWindow} = useWindowStore();
   const { theme, toggleTheme } = useThemeStore();
+  const [now, setNow] = useState(dayjs())
+
+  useEffect(() => {
+    const timer = setInterval(() => setNow(dayjs()), 1000)
+    return () => clearInterval(timer)
+  }, [])
 
   return (
     <nav className="max-sm:hidden">
     <div>
       <img src="/images/logo.svg" alt="logo" className="nav-icon" />
       <p className=' font-bold'>Samprit Das</p>
-      <ul>
+      {/* <ul>
         {navLinks.map((item) => (
           <li key={item.id} onClick={() => openWindow(item.type)}>
             <p>{item.name}</p>
           </li>
         ))}
-      </ul>
+      </ul> */}
     </div>
 
     <div>
@@ -42,8 +48,8 @@ const Navbar = () => {
       ))}
       </ul>
 
-      <time>{dayjs().format('h:MM A')}</time>
-      <time>{dayjs().format('ddd, MMM DD')}</time>
+      <time>{now.format('h:mm A')}</time>
+      <time>{now.format('ddd, MMM DD')}</time>
     </div>
     </nav>
   )
