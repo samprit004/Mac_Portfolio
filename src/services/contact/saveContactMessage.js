@@ -1,4 +1,4 @@
-import supabase from '#/services/supabase/client.js'
+import { getSupabaseClient } from '#/services/supabase/client.js'
 
 const CONTACT_MESSAGES_TABLE = import.meta.env.VITE_SUPABASE_CONTACT_TABLE || 'contact_messages'
 const RECIPIENT_EMAIL = 'sampritdas2004@gmail.com'
@@ -26,6 +26,7 @@ const saveContactMessage = async ({ from, subject, body, sentFrom }) => {
     status: 'new',
   }
 
+  const supabase = getSupabaseClient()
   const { error } = await supabase.from(CONTACT_MESSAGES_TABLE).insert(payload)
 
   if (error) {
