@@ -92,15 +92,6 @@ export const COMMANDS = [
     subcommands: ['list', 'open'],
   },
   {
-    name: 'articles',
-    aliases: ['blog', 'posts'],
-    description: 'Read blog articles',
-    usage: 'articles [list | latest]',
-    category: 'Portfolio',
-    keywords: ['articles', 'blog', 'posts', 'writing', 'read'],
-    subcommands: ['list', 'latest'],
-  },
-  {
     name: 'skills',
     aliases: ['stack', 'tech'],
     description: 'View tech stack and skills',
@@ -131,14 +122,6 @@ export const COMMANDS = [
     usage: 'contact',
     category: 'Portfolio',
     keywords: ['contact', 'email', 'reach', 'hire', 'message'],
-  },
-  {
-    name: 'socials',
-    aliases: ['social', 'links'],
-    description: 'Social media links',
-    usage: 'socials',
-    category: 'Portfolio',
-    keywords: ['socials', 'social', 'twitter', 'github', 'links'],
   },
   {
     name: 'experience',

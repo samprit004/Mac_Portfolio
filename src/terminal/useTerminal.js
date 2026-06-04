@@ -5,9 +5,7 @@ import useLocationStore from '#store/location.js';
 import { COMMANDS, COMMAND_MAP } from '#/terminal/registry.js';
 import { parseCommand } from '#/terminal/parser.js';
 import {
-  blogPosts,
   techStack,
-  socials,
   locations,
   dockApps,
   education,
@@ -90,11 +88,10 @@ const fuse = new Fuse(COMMANDS, {
 
 const FS = {
   '~':                       ['portfolio/'],
-  '~/portfolio':             ['projects/', 'articles/', 'about/', 'contact/', 'resume/'],
+  '~/portfolio':             ['projects/', 'about/', 'contact/', 'resume/'],
   '~/portfolio/projects':    Object.keys(locations.work?.children?.reduce((a,c) => ({...a,[c.name+'/']:1}), {}) ?? {}),
-  '~/portfolio/articles':    blogPosts.map(b => b.title.replace(/\s+/g,'_').toLowerCase() + '.md'),
   '~/portfolio/about':       ['me.png', 'about-me.txt'],
-  '~/portfolio/contact':     ['email.txt', 'socials.json'],
+  '~/portfolio/contact':     ['email.txt'],
   '~/portfolio/resume':      ['Resume.pdf'],
 };
 
@@ -321,7 +318,6 @@ const useTerminal = () => {
     // ── neofetch ─────────────────────────────────────────────────────────────
     neofetch: () => {
       const projectCount = locations.work?.children?.length ?? 0;
-      const articleCount = blogPosts.length;
       const skillCount   = techStack.reduce((s, c) => s + c.items.length, 0);
       const now          = new Date();
       const uptime       = `Always online 🟢`;
@@ -346,7 +342,6 @@ const useTerminal = () => {
             ['Date', now.toDateString()],
             ['Uptime', uptime],
             ['Projects', `${projectCount} shipped`],
-            ['Articles', `${articleCount} published`],
             ['Tech stack', `${skillCount} technologies`],
             ['Theme', THEMES[localStorage.getItem(THEME_KEY) ?? 'dark']?.name ?? 'dark'],
           ],
@@ -387,35 +382,6 @@ const useTerminal = () => {
       }
 
       return [err(`Unknown sub-command: ${sub}.  Usage: /projects [list | open <name>]`)];
-    },
-
-    // ── articles ──────────────────────────────────────────────────────────────
-    articles: ({ args, ctx }) => {
-      const sub = args[0];
-
-      if (sub === 'latest') {
-        const latest = [...blogPosts].sort((a, b) => new Date(b.date) - new Date(a.date))[0];
-        if (!latest) return [warn('  No articles found.')];
-        ctx.openWindow('safari');
-        return [
-          ok(`  Opening: ${latest.title}`),
-          dim(`  Published: ${latest.date}`),
-        ];
-      }
-
-      const list = !sub || sub === 'list' ? blogPosts : blogPosts.filter(b =>
-        b.title.toLowerCase().includes(sub.toLowerCase())
-      );
-
-      return [
-        blank(),
-        info(`  Articles  (${list.length} found)`),
-        sep(),
-        ...list.map((b, i) => mkLine('article-row', { index: i + 1, article: b })),
-        blank(),
-        dim('  /articles latest  →  open newest article'),
-        blank(),
-      ];
     },
 
     // ── skills ────────────────────────────────────────────────────────────────
@@ -463,19 +429,8 @@ const useTerminal = () => {
         sep(),
         out('  Opening contact window...'),
         blank(),
-        dim('  /socials  for social media links'),
-        blank(),
       ];
     },
-
-    // ── socials ───────────────────────────────────────────────────────────────
-    socials: () => [
-      blank(),
-      info('  Social Links'),
-      sep(),
-      ...socials.map(s => mkLine('social-row', { social: s })),
-      blank(),
-    ],
 
     // ── experience ────────────────────────────────────────────────────────────
     experience: () => {
@@ -601,16 +556,6 @@ const useTerminal = () => {
         projMatches.forEach((p, i) => results.push(
           mkLine('project-row', { index: i + 1, project: p })
         ));
-        results.push(blank());
-      }
-
-      // Search articles
-      const artMatches = blogPosts.filter(b =>
-        b.title.toLowerCase().includes(query)
-      );
-      if (artMatches.length) {
-        results.push(info('  Articles:'));
-        artMatches.forEach(b => results.push(out(`    ${b.title}`)));
         results.push(blank());
       }
 

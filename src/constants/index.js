@@ -285,7 +285,44 @@ const navLinks = [
     name: "Skills",
     icon: "/icons/skills.svg",
     kind: "folder",
-    children: [],
+    children: [
+      {
+        id: "skills-frontend",
+        type: "skill-category",
+        skillCategory: "frontend",
+        name: "Front-end",
+        icon: "/images/folder.png",
+        kind: "folder",
+        children: [],
+      },
+      {
+        id: "skills-backend",
+        type: "skill-category",
+        skillCategory: "backend",
+        name: "Back-end",
+        icon: "/images/folder.png",
+        kind: "folder",
+        children: [],
+      },
+      {
+        id: "skills-database",
+        type: "skill-category",
+        skillCategory: "db",
+        name: "Database",
+        icon: "/images/folder.png",
+        kind: "folder",
+        children: [],
+      },
+      {
+        id: "skills-devops",
+        type: "skill-category",
+        skillCategory: "devops",
+        name: "DevOps",
+        icon: "/images/folder.png",
+        kind: "folder",
+        children: [],
+      },
+    ],
   };
   
   const WORK_LOCATION = {

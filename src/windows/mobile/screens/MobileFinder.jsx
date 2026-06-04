@@ -12,7 +12,7 @@ const resumeShortcut = {
 const skillsShortcut = {
   id: 'skills-shortcut',
   name: 'Skills',
-  icon: '/images/txt.png',
+  icon: '/images/folder.png',
   kind: 'file',
   fileType: 'skills',
 }
@@ -23,7 +23,7 @@ const MobileFinder = ({ location = 'work' }) => {
   const loc = locations[location]
   const baseItems = loc?.children ?? []
   const items = location === 'work'
-    ? [...baseItems, resumeShortcut, skillsShortcut]
+    ? [...baseItems, skillsShortcut, resumeShortcut]
     : baseItems
 
   const handleItem = (item) => {

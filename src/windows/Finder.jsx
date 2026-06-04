@@ -50,6 +50,8 @@ const groupedSkills = SKILL_CATEGORY_ORDER.map((category) => {
     };
 });
 
+const groupedSkillsMap = Object.fromEntries(groupedSkills.map((group) => [group.key, group]));
+
 const Finder = () => {
 
     const {openWindow} = useWindowStore();
@@ -61,6 +63,17 @@ const Finder = () => {
         locations.skills,
         locations.trash,
     ];
+
+    const isLocationActive = (item) => {
+        if (!activeLocation) return false;
+        if (item.id === activeLocation.id) return true;
+
+        if (item.type === 'skills' && activeLocation.type === 'skill-category') {
+            return true;
+        }
+
+        return false;
+    };
 
     const openItem = (item) => {
         if(item.fileType === 'pdf') return openWindow('resume');
@@ -74,48 +87,38 @@ const Finder = () => {
         <li 
         key={item.id} 
         onClick={() => setActiveLocation(item)}
-        className={clsx(item.id === activeLocation.id ? 'active' : 'not-active')}>
+        className={clsx(isLocationActive(item) ? 'active' : 'not-active')}>
             <img src={item.icon} alt={item.name} className='w-4 h-4' />
             <p className='text-sm font-medium truncate'>{item.name}</p>
 
         </li>
     ))
 
-    const renderSkillsSection = () => (
-        <div className="skills-content">
-            <div className="mx-auto flex max-w-4xl flex-col gap-5">
-                {groupedSkills.map(({ key, label, items }) => (
-                    <section key={key} className="space-y-2">
-                        <div className="space-y-1.5">
-                            <h3 className="text-[14px] font-semibold tracking-[-0.02em]" style={{ color: 'var(--window-text)' }}>{label}</h3>
-                            <div className="h-px w-full" style={{ background: 'var(--window-divider)' }} />
-                        </div>
+    const renderSkillsSection = (skillCategory) => {
+        const group = groupedSkillsMap[skillCategory];
 
-                        {items.length ? (
-                            <div className="flex flex-wrap gap-2">
-                                {items.map((item) => (
-                                    <div
-                                        key={item.id}
-                                        className="group flex items-center gap-1.5 rounded-full border px-2.5 py-1.5 transition-all duration-200 hover:-translate-y-0.5"
-                                        style={{
-                                            borderColor: 'var(--finder-chip-border)',
-                                            background: 'var(--finder-chip-bg)',
-                                            boxShadow: 'var(--finder-chip-shadow)',
-                                        }}
-                                    >
-                                        <img src={item.icon} alt={item.name} className="size-4 shrink-0 object-contain object-center opacity-90 transition-transform duration-200 group-hover:scale-105" />
-                                        <p className="text-[12px] font-medium leading-none tracking-[-0.01em]" style={{ color: 'var(--finder-chip-text)' }}>{item.name}</p>
-                                    </div>
-                                ))}
+        if (!group) return null;
+
+        return (
+            <ul className='content'>
+                {group.items.length ? (
+                    group.items.map((item) => (
+                        <li
+                            key={item.id}
+                            className="finder-grid-item skill-grid-item"
+                        >
+                            <div className="skill-grid-icon-wrap">
+                                <img src={item.icon} alt={item.name} className="skill-grid-icon" />
                             </div>
-                        ) : (
-                            <p className="text-[13px]" style={{ color: 'var(--window-muted)' }}>No skills added yet.</p>
-                        )}
-                    </section>
-                ))}
-            </div>
-        </div>
-    )
+                            <p>{item.name}</p>
+                        </li>
+                    ))
+                ) : (
+                    <li className="text-sm" style={{ color: 'var(--window-muted)' }}>No skills added yet.</li>
+                )}
+            </ul>
+        )
+    }
 
   return (
     <>
@@ -139,8 +142,8 @@ const Finder = () => {
             </ul>
             </div>
         </div>
-        {activeLocation?.type === 'skills' ? (
-            renderSkillsSection()
+        {activeLocation?.type === 'skill-category' ? (
+            renderSkillsSection(activeLocation.skillCategory)
         ) : (
             <ul className='content'>
                 {activeLocation ?.children.map((item)=>(

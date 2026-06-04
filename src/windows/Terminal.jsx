@@ -2,7 +2,6 @@ import React from 'react';
 import WindowWrapper from '#hoc/WindowWrapper.jsx';
 import WindowControls from '#components/WindowControls.jsx';
 import useTerminal from '#/terminal/useTerminal.js';
-import { ExternalLink } from 'lucide-react';
 
 // ─── Individual line renderer ─────────────────────────────────────────────────
 
@@ -74,41 +73,12 @@ const OutputLine = ({ line, s, onAction }) => {
       );
     }
 
-    case 'article-row': {
-      const a = content.article;
-      return (
-        <div className="t-data-row">
-          <span style={{ color: s.dim }}>{String(content.index).padStart(2, '0')}.</span>
-          <span style={{ color: s.info, minWidth: 96, display: 'inline-block', marginLeft: 12, fontSize: 11 }}>
-            {a.date}
-          </span>
-          <a href={a.link} target="_blank" rel="noreferrer" className="t-link" style={{ color: s.text }}>
-            {a.title}
-            <ExternalLink size={11} style={{ marginLeft: 5, display: 'inline', verticalAlign: 'middle', opacity: 0.4 }} />
-          </a>
-        </div>
-      );
-    }
-
     case 'skill-row': {
       const { category, items } = content;
       return (
         <div className="t-data-row">
           <span style={{ color: s.warning, minWidth: 120, display: 'inline-block' }}>{category}</span>
           <span style={{ color: s.text }}>{items.join('  ·  ')}</span>
-        </div>
-      );
-    }
-
-    case 'social-row': {
-      const { social } = content;
-      return (
-        <div className="t-data-row">
-          <span style={{ color: s.dim, minWidth: 100, display: 'inline-block' }}>{social.text}</span>
-          <a href={social.link} target="_blank" rel="noreferrer" className="t-link" style={{ color: s.info }}>
-            {social.link}
-            <ExternalLink size={11} style={{ marginLeft: 5, display: 'inline', verticalAlign: 'middle', opacity: 0.4 }} />
-          </a>
         </div>
       );
     }
