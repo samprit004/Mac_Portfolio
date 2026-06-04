@@ -77,7 +77,7 @@ const Welcome = () => {
     },[]);
   
     return (
-    <section id='welcome'>
+    <section id='welcome' className="max-sm:hidden">
         <p ref={subtitleRef}>
             {renderText(
                 "Hey, It's Samprit! Welcome to my", 

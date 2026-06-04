@@ -49,12 +49,6 @@ const navLinks = [
       canOpen: true,
     },
     {
-      id: "photos",
-      name: "Gallery", // was "Photos"
-      icon: "photos.png",
-      canOpen: true,
-    },
-    {
       id: "contact",
       name: "Contact", // or "Get in touch"
       icon: "contact.png",
@@ -70,15 +64,86 @@ const navLinks = [
       id: "trash",
       name: "Archive", // was "Trash"
       icon: "trash.png",
-      canOpen: false,
+      canOpen: true,
     },
     {
-      id: "settings",
-      name: "settings", // was "settings"
-      icon: "settings.png",
+      id: "photos",
+      name: "Gallery", // was "Photos"
+      icon: "photos.png",
       canOpen: true,
     },
   ];
+
+  export const education = [
+    {
+      degree: "Bachelor of Technology - CSE (AI & ML)",
+      institute: "University of Engineering and Management, Kolkata",
+      score: "8.11 CGPA",
+      year: "2026",
+    },
+    {
+      degree: "Senior Secondary",
+      institute: "Dum Dum Kishore Bharati High School",
+      score: "88%",
+      year: "2022",
+    },
+    {
+      degree: "Secondary",
+      institute: "Dum Dum Kishore Bharati High School",
+      score: "88%",
+      year: "2020",
+    },
+  ]
+  
+  export const experience = [
+    {
+      company: "Meru Technosoft Private Limited",
+      role: "Lead Frontend Developer",
+      duration: "Jun 2025 - Dec 2025",
+      location: "Gujarat, India",
+      description:
+        "Led frontend development of a scalable accounting platform using React and Tailwind CSS, building reusable component-based architectures and optimizing performance to improve workflows and accessibility.",
+    },
+    {
+      company: "Meru Technosoft Private Limited",
+      role: "Frontend Developer intern",
+      duration: "Dec 2025 - Present",
+      location: "Gujarat, India",
+      description:
+        "Developed and optimized modern frontend applications with scalable UI solutions, efficient state management, and seamless backend integration.",
+    },
+    {
+      company: "Coding Jr.",
+      role: "AI Intern",
+      duration: "Sep 2025 - Dec 2025",
+      location: "Remote",
+      description:
+        "Worked on AI-powered solutions and automation workflows, assisting in prompt engineering, model integrations, and building intelligent user-focused features for real-world applications.",
+    },
+  ]
+  export const achievements = [
+    {
+      title: "Winner - Best GenAI Hack Track",
+      organization: "Kolkata Hackathon",
+      year: "2025",
+      description:
+        "Won the Best GenAI Hack Track award for building an AI-powered legal awareness platform.",
+    },
+    {
+      title: "SIH 2024 Finalist",
+      organization: "Smart India Hackathon",
+      year: "2024",
+      description:
+        "Selected as a finalist for developing the S&T and R&D Coal Project Management System.",
+    },
+    {
+      title: "1st Place - Hackhive Hoopla 2.0",
+      organization: "UEM Kolkata",
+      year: "2024",
+      description:
+        "Secured 1st place for building an advanced home security solution during the hackathon.",
+    },
+  ]
   
   const blogPosts = [
     {
@@ -154,13 +219,6 @@ const navLinks = [
       bg: "#ff866b",
       link: "https://x.com/jsmasterypro",
     },
-    {
-      id: 4,
-      text: "LinkedIn",
-      icon: "/icons/linkedin.svg",
-      bg: "#05b6f6",
-      link: "https://www.linkedin.com/company/javascriptmastery/posts/?feedView=all",
-    },
   ];
   
   const photosLinks = [
@@ -220,6 +278,15 @@ const navLinks = [
     photosLinks,
     gallery,
   };
+
+  const SKILLS_LOCATION = {
+    id: "skills-root",
+    type: "skills",
+    name: "Skills",
+    icon: "/icons/skills.svg",
+    kind: "folder",
+    children: [],
+  };
   
   const WORK_LOCATION = {
     id: 1,
@@ -231,159 +298,164 @@ const navLinks = [
       // ▶ Project 1
       {
         id: 5,
-        name: "Nike Ecommerce Website Application",
+        name: "Pocket legal aid",
         icon: "/images/folder.png",
         kind: "folder",
         position: "top-10 left-5", // icon position inside Finder
-        windowPosition: "top-[5vh] left-5", // optional: Finder window position
+        windowPosition: "top-[13vh] left-8", // home icon position
         children: [
           {
             id: 1,
-            name: "Nike Project.txt",
+            name: "Pocket legal aid.txt",
             icon: "/images/txt.png",
             kind: "file",
             fileType: "txt",
-            position: "top-5 left-10",
+            position: "top-5 left-5",
             description: [
-              "The Nike eCommerce website is a sleek and modern platform designed for shopping the latest Nike collections.",
-              "Instead of a simple online store, it delivers an immersive experience with bold visuals, interactive product displays, and smooth navigation.",
-              "Think of it like walking into a flagship Nike store—but right from your phone or laptop.",
-              "It's built with Next.js and Tailwind, ensuring fast performance, responsive design, and a clean, premium look.",
-            ],
+              "Pocket Legal Aid is an AI-powered legal awareness platform built to simplify access to constitutional knowledge and legal guidance.",
+              "By combining interactive learning modules with an intelligent chatbot, it helps users understand their rights and find relevant legal information with ease.",
+              "Think of it as a digital legal assistant—making legal awareness more accessible, intuitive, and user-friendly.",
+              "The solution's innovative use of Generative AI earned our team the Best GenAI Hack Track award, showcasing its impact and real-world potential.",
+              "Built with React, Flask, Firebase, and Gemini API, it provides a fast, seamless, and responsive experience across desktop and mobile devices.",
+            ],              
           },
           {
             id: 2,
-            name: "nike.com",
+            name: "Pocket legal aid.com",
             icon: "/images/safari.png",
             kind: "file",
             fileType: "url",
-            href: "https://youtu.be/fZdTYswuZjU?si=Awjl-pIst9e09_UU",
+            href: "https://github.com/samprit004/Diversion_2k25/tree/main/my-tailwind-app",
             position: "top-10 right-20",
           },
           {
             id: 4,
-            name: "nike.png",
+            name: "Pocket legal aid.png",
             icon: "/images/image.png",
             kind: "file",
             fileType: "img",
             position: "top-52 right-80",
-            imageUrl: "/images/project-1.png",
+            imageUrl: "/images/pocket_legal_aid.png",
           },
-          {
-            id: 5,
-            name: "Design.fig",
-            icon: "/images/plain.png",
-            kind: "file",
-            fileType: "fig",
-            href: "https://google.com",
-            position: "top-60 right-20",
-          },
+          // {
+          //   id: 5,
+          //   name: "Tech Stack",
+          //   icon: "/images/plain.png",
+          //   kind: "file",
+          //   fileType: "fig",
+          //   href: "https://google.com",
+          //   position: "top-60 right-20",
+          // },
         ],
       },
   
       // ▶ Project 2
       {
         id: 6,
-        name: "AI Resume Analyzer",
+        name: "Marg Sathi",
         icon: "/images/folder.png",
         kind: "folder",
         position: "top-52 right-80",
-        windowPosition: "top-[20vh] left-7",
+        windowPosition: "top-[32vh] left-11",
         children: [
           {
             id: 1,
-            name: "AI Resume Analyzer Project.txt",
+            name: "Marg Sathi.txt",
             icon: "/images/txt.png",
             kind: "file",
             fileType: "txt",
             position: "top-5 right-10",
             description: [
-              "AI Resume Analyzer is a smart tool that helps you perfect your resume with instant feedback.",
-              "Instead of guessing what recruiters want, you get AI-powered insights on keywords, formatting, and overall impact.",
-              "Think of it like having a career coach—pointing out strengths, fixing weaknesses, and boosting your chances of landing interviews.",
-              "It's built with Next.js and Tailwind, so it runs fast, looks professional, and works seamlessly on any device.",
-            ],
+              "Marg Sathi is an AI-powered project management platform created for Smart India Hackathon 2024 to modernize the management of S&T and R&D coal projects.",
+              "By replacing manual processes with a centralized system for real-time tracking and AI-driven assessments, it helped streamline workflows and improve decision-making.",
+              "Think of it as a digital command center—bringing project data, reporting, and insights together in one place.",
+              "The solution was recognized nationally, earning a place among the finalists of Smart India Hackathon 2024.",
+              "Built with Next.js and Tailwind CSS, it provides a fast, responsive, and intuitive experience across all devices.",
+              ],
+              
           },
           {
             id: 2,
-            name: "ai-resume-analyzer.com",
+            name: "Marg Sathi.com",
             icon: "/images/safari.png",
             kind: "file",
             fileType: "url",
-            href: "https://youtu.be/iYOz165wGkQ?si=R1hs8Legl200m0Cl",
+            href: "https://github.com/samprit004/sih",
             position: "top-20 left-20",
           },
           {
             id: 4,
-            name: "ai-resume-analyzer.png",
+            name: "Marg Sathi.png",
             icon: "/images/image.png",
             kind: "file",
             fileType: "img",
             position: "top-52 left-80",
-            imageUrl: "/images/project-2.png",
+            imageUrl: "/images/marg_sathi.png",
           },
-          {
-            id: 5,
-            name: "Design.fig",
-            icon: "/images/plain.png",
-            kind: "file",
-            fileType: "fig",
-            href: "https://google.com",
-            position: "top-60 left-5",
-          },
+          // {
+          //   id: 5,
+          //   name: "Tech Stack",
+          //   icon: "/images/plain.png",
+          //   kind: "file",
+          //   fileType: "fig",
+          //   href: "https://google.com",
+          //   position: "top-60 left-5",
+          // },
         ],
       },
   
       // ▶ Project 3
       {
         id: 7,
-        name: "Food Delivery App",
+        name: "Freelance Work",
         icon: "/images/folder.png",
         kind: "folder",
         position: "top-10 left-80",
-        windowPosition: "top-[33vh] left-7",
+        windowPosition: "top-[50vh] left-8",
         children: [
           {
             id: 1,
-            name: "Food Delivery App Project.txt",
+            name: "Freelance Work.txt",
             icon: "/images/txt.png",
             kind: "file",
             fileType: "txt",
             position: "top-5 left-10",
             description: [
-              "Our Food Delivery App is a fast and convenient way to order meals from your favorite restaurants.",
-              "Instead of making calls or waiting in line, you can browse menus, customize orders, and track deliveries in real time.",
-              "Think of it like having your favorite restaurants in your pocket—ready to deliver anytime, anywhere.",
-              "It’s built with React Native, so it works smoothly on both iOS and Android with a clean, modern design.",
-            ],
+              "This freelance portfolio website was crafted for a client to showcase their work with a premium and modern online presence.",
+              "Instead of a static portfolio, it delivers an engaging experience through smooth GSAP animations, polished components, and thoughtfully designed interactions.",
+              "Think of it as a digital showcase—combining aesthetics and functionality to leave a lasting impression on visitors.",
+              "Built with React and Tailwind CSS, the site features responsive layouts, modern UI components, and seamless animations, while Supabase powers the backend and database for efficient content management.",
+              "The result is a fast, visually striking, and highly customizable portfolio experience across desktop and mobile devices.",
+              ],
+              
           },
           {
             id: 2,
-            name: "food-delivery-app.com",
+            name: "Freelance Work.com",
             icon: "/images/safari.png",
             kind: "file",
             fileType: "url",
-            href: "https://youtu.be/LKrX390fJMw?si=cExkuVhf2DTV9G2-",
+            href: "https://tonima-das-portfolio.netlify.app/",
             position: "top-10 right-20",
           },
           {
             id: 4,
-            name: "food-delivery-app.png",
+            name: "Freelance Work.png",
             icon: "/images/image.png",
             kind: "file",
             fileType: "img",
             position: "top-52 right-80",
-            imageUrl: "/images/project-3.png",
+            imageUrl: "/images/freelance.png",
           },
-          {
-            id: 5,
-            name: "Design.fig",
-            icon: "/images/plain.png",
-            kind: "file",
-            fileType: "fig",
-            href: "https://google.com",
-            position: "top-60 right-20",
-          },
+          // {
+          //   id: 5,
+          //   name: "Tech Stack",
+          //   icon: "/images/plain.png",
+          //   kind: "file",
+          //   fileType: "fig",
+          //   href: "https://google.com",
+          //   position: "top-60 right-20",
+          // },
         ],
       },
     ],
@@ -403,7 +475,7 @@ const navLinks = [
         kind: "file",
         fileType: "img",
         position: "top-10 left-5",
-        imageUrl: "/images/adrian.jpg",
+        imageUrl: "/images/samprit-1.jpg",
       },
       {
         id: 2,
@@ -412,17 +484,17 @@ const navLinks = [
         kind: "file",
         fileType: "img",
         position: "top-28 right-72",
-        imageUrl: "/images/adrian-2.jpg",
+        imageUrl: "/images/samprit-2.jpg",
       },
-      {
-        id: 3,
-        name: "conference-me.png",
-        icon: "/images/image.png",
-        kind: "file",
-        fileType: "img",
-        position: "top-52 left-80",
-        imageUrl: "/images/adrian-3.jpeg",
-      },
+      // {
+      //   id: 3,
+      //   name: "conference-me.png",
+      //   icon: "/images/image.png",
+      //   kind: "file",
+      //   fileType: "img",
+      //   position: "top-52 left-80",
+      //   imageUrl: "/images/adrian-3.jpeg",
+      // },
       {
         id: 4,
         name: "about-me.txt",
@@ -431,14 +503,41 @@ const navLinks = [
         fileType: "txt",
         position: "top-60 left-5",
         subtitle: "Meet the Developer Behind the Code",
-        image: "/images/adrian.jpg",
+        image: "/images/samprit-1.jpg",
         description: [
-          "Hey! I’m Adrian 👋, a web developer who enjoys building sleek, interactive websites that actually work well.",
-          "I specialize in JavaScript, React, and Next.js—and I love making things feel smooth, fast, and just a little bit delightful.",
-          "I’m big on clean UI, good UX, and writing code that doesn’t need a search party to debug.",
-          "Outside of dev work, you'll find me tweaking layouts at 2AM, sipping overpriced coffee, or impulse-buying gadgets I absolutely convinced myself I needed 😅",
+          "Hey! I'm Samprit 👋, a Frontend Developer who enjoys turning ideas into clean, interactive web experiences.",
+          "I primarily work with JavaScript, React, Next.js, and modern frontend tools, focusing on building fast, responsive, and user-friendly applications.",
+          "I'm passionate about creating polished UI, improving user experience, and writing maintainable code that scales without becoming a headache.",
+          "Beyond coding, you'll usually find me refining my portfolio, exploring new web technologies, following football, or spending way too much time perfecting tiny design details that most people won't notice 😅",
         ],
       },
+      {
+        id: 5,
+        name: "Experience",
+        icon: "/images/plain.png",
+        kind: "file",
+        fileType: "timeline",
+        timelineType: "experience",
+        position: "top-10 left-5",
+      },
+      {
+        id: 6,
+        name: "Education",
+        icon: "/images/plain.png",
+        kind: "file",
+        fileType: "timeline",
+        timelineType: "education",
+        position: "top-28 right-72",
+      },
+      {
+        id: 7,
+        name: "Achievements",
+        icon: "/images/plain.png",
+        kind: "file",
+        fileType: "timeline",
+        timelineType: "achievements",
+        position: "top-52 left-80",
+      }
     ],
   };
   
@@ -493,6 +592,7 @@ const navLinks = [
     work: WORK_LOCATION,
     about: ABOUT_LOCATION,
     resume: RESUME_LOCATION,
+    skills: SKILLS_LOCATION,
     trash: TRASH_LOCATION,
   };
   
@@ -501,9 +601,11 @@ const navLinks = [
   const WINDOW_CONFIG = {
     finder: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
     contact: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
+    gmail: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
     resume: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
     safari: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
     photos: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
+    timelinefile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
     terminal: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
     txtfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
     imgfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
