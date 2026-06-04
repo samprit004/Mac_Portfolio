@@ -385,17 +385,17 @@ const useTerminal = () => {
     },
 
     // ── skills ────────────────────────────────────────────────────────────────
-    skills: () => [
-      blank(),
-      info('  Tech Stack'),
-      sep(),
-      ...techStack.map(({ category, items }) =>
-        mkLine('skill-row', { category, items })
-      ),
-      blank(),
-      dim(`  ${techStack.reduce((s,c) => s + c.items.length, 0)} technologies mastered`),
-      blank(),
-    ],
+    skills: ({ ctx }) => {
+      ctx.openWindow('finder');
+      setTimeout(() => ctx.setActiveLocation(locations.skills), 50);
+      return [
+        blank(),
+        info('  Skills'),
+        sep(),
+        out('  Opening skills section in Finder...'),
+        blank(),
+      ];
+    },
 
     // ── resume ────────────────────────────────────────────────────────────────
     resume: ({ ctx }) => {
