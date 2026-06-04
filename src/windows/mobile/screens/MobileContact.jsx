@@ -107,7 +107,7 @@ const MobileContact = () => {
   const SOCIAL_LINKS = [
     { label: 'Gmail',      action: 'gmail',       icon: <MailIcon />,      className: 'bg-[#3478f6] text-white hover:brightness-95' },
     { label: 'GitHub',     action: 'safari',      icon: <GHIcon />,        className: 'bg-[#24292e] text-white hover:brightness-95' },
-    { label: 'LinkedIn',   href: 'https://linkedin.com/in/samprit-das', icon: <LIIcon />, className: 'bg-[#0a66c2] text-white hover:brightness-95' },
+    { label: 'LinkedIn',   href: 'https://www.linkedin.com/in/samprit-das-744591292/', icon: <LIIcon />, className: 'bg-[#0a66c2] text-white hover:brightness-95' },
     { label: 'Call',       onClick: handleCall,   icon: <PhoneIcon />,     className: 'bg-[#34c759] text-white hover:brightness-95' },
   ]
 

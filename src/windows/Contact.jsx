@@ -56,7 +56,7 @@ const SOCIAL_LINKS = [
   },
   {
     label: 'LinkedIn',
-    href: 'https://linkedin.com/in/samprit-das',
+    href: 'https://www.linkedin.com/in/samprit-das-744591292/',
     icon: <LIIcon />,
     className: 'bg-[#0a66c2] text-white hover:brightness-95',
   },
