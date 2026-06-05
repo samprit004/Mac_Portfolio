@@ -1,16 +1,41 @@
-import { useRef } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
-import { Draggable } from 'gsap/Draggable'
-import { locations } from '#constants/index.js'
-import useMobileWindowStore from '#store/mobileWindow.js'
-import useDeviceMode from '#/hooks/useDeviceMode.js'
 import Dock from './Dock'
+import { locations } from '#constants/index.js'
+import useDeviceMode from '#/hooks/useDeviceMode.js'
+import useMobileWindowStore from '#store/mobileWindow.js'
 
 /* ── Same font-weight animation as Welcome.jsx, adapted for touch ── */
 const FONT_WEIGHTS = {
   subtitle: { min: 100, max: 400, default: 100 },
   title:    { min: 100, max: 800, default: 300 },
+}
+
+const MOBILE_FINDER_TABS = [
+  {
+    id: 'work',
+    label: 'Work',
+    icon: '/icons/work.svg',
+    screen: { id: 'work', title: 'Work', component: 'finder', props: { location: 'work' } },
+  },
+  {
+    id: 'about',
+    label: 'About Me',
+    icon: '/icons/info.svg',
+    screen: { id: 'about', title: 'About Me', component: 'finder', props: { location: 'about' } },
+  },
+  {
+    id: 'skills',
+    label: 'Skills',
+    icon: '/icons/skills.svg',
+    screen: { id: 'skills', title: 'Skills', component: 'skills', props: {} },
+  },
+]
+
+const getIsPortrait = () => {
+  if (typeof window === 'undefined') return false
+  return window.matchMedia('(orientation: portrait)').matches
 }
 
 const renderText = (text, className, baseweight = 300) =>
@@ -60,62 +85,26 @@ const setupTextInteraction = (container, type) => {
   }
 }
 
-/* ── Desktop items — same data as Home.jsx ── */
-const projects = locations.work?.children ?? []
-const resumeShortcut = {
-  id: 'resume-shortcut',
-  name: locations.resume.children?.[0]?.name ?? 'Resume.pdf',
-  icon: locations.resume.children?.[0]?.icon ?? '/images/pdf.png',
-  type: 'resume',
-}
-const desktopItems = [...projects, resumeShortcut]
-
-/* One item per corner — top items pushed below the 36 px status bar */
-const MOBILE_POS = {
-  5:                'top-14   left-4',
-  6:                'top-14   right-4',
-  7:                'bottom-4 left-4',
-  'resume-shortcut':'bottom-4 right-4',
-}
-
-const TABLET_POS = {
-  5: 'top-20 left-8',
-  6: 'top-20 right-8',
-  7: 'bottom-8 left-8',
-  'resume-shortcut': 'bottom-8 right-8',
-}
-
 /* ── Component ── */
 const MobileHomeScreen = () => {
-  const { open: openMobileWindow } = useMobileWindowStore()
-  const { isTablet } = useDeviceMode()
   const titleRef    = useRef(null)
   const subtitleRef = useRef(null)
-  const iconPositions = isTablet ? TABLET_POS : MOBILE_POS
+  const { isTablet } = useDeviceMode()
+  const openMobileWindow = useMobileWindowStore((state) => state.open)
+  const [isPortrait, setIsPortrait] = useState(getIsPortrait)
 
-  const openMobileItem = (item) => {
-    if (!item) return
+  const tabletProjects = useMemo(
+    () => (locations.work?.children ?? []).filter((item) => item.kind === 'folder').slice(0, 3),
+    []
+  )
 
-    if (item.type === 'resume') {
-      openMobileWindow({
-        initialScreen: { id: 'resume', title: 'Resume.pdf', component: 'resume', props: {} },
-        footerTabs: [],
-        activeTabId: null,
-      })
-      return
-    }
+  const resumeShortcut = useMemo(() => ({
+    id: 'resume-shortcut',
+    name: locations.resume?.children?.[0]?.name ?? 'Resume.pdf',
+    icon: locations.resume?.children?.[0]?.icon ?? '/images/pdf.png',
+  }), [])
 
-    openMobileWindow({
-      initialScreen: {
-        id: `proj-${item.id}`,
-        title: item.name,
-        component: 'project',
-        props: { project: item },
-      },
-      footerTabs: [],
-      activeTabId: null,
-    })
-  }
+  const showTabletShortcuts = isTablet && isPortrait
 
   /* Animated text */
   useGSAP(() => {
@@ -124,37 +113,91 @@ const MobileHomeScreen = () => {
     return () => { c1?.(); c2?.() }
   }, [])
 
-  /* Draggable folders — distinct class from desktop '.folder' */
-  useGSAP(() => {
-    const itemsById = new Map(desktopItems.map((item) => [String(item.id), item]))
+  useEffect(() => {
+    if (typeof window === 'undefined') return undefined
 
-    const draggables = Draggable.create('.mob-folder', {
-      minimumMovement: 8,
-      onPress()   { this.target.dataset.dragging = 'false' },
-      onDrag()    { this.target.dataset.dragging = 'true' },
-      onRelease() {
-        const shouldOpen = this.target.dataset.dragging !== 'true'
-        const itemId = this.target.dataset.mobItem
+    const mediaQuery = window.matchMedia('(orientation: portrait)')
+    const updateOrientation = () => setIsPortrait(mediaQuery.matches)
 
-        requestAnimationFrame(() => {
-          this.target.dataset.dragging = 'false'
-        })
-
-        if (shouldOpen) {
-          openMobileItem(itemsById.get(String(itemId)))
-        }
-      },
-    })
+    updateOrientation()
+    mediaQuery.addEventListener?.('change', updateOrientation)
+    window.addEventListener('resize', updateOrientation)
 
     return () => {
-      draggables.forEach((draggable) => draggable.kill())
+      mediaQuery.removeEventListener?.('change', updateOrientation)
+      window.removeEventListener('resize', updateOrientation)
     }
   }, [])
+
+  const handleProjectShortcut = (project) => {
+    openMobileWindow({
+      initialScreen: {
+        id: `project-${project.id}`,
+        title: project.name,
+        component: 'project',
+        props: { project },
+      },
+      footerTabs: MOBILE_FINDER_TABS,
+      activeTabId: 'work',
+    })
+  }
+
+  const handleResumeShortcut = () => {
+    openMobileWindow({
+      initialScreen: {
+        id: 'resume',
+        title: resumeShortcut.name,
+        component: 'resume',
+        props: {},
+      },
+      footerTabs: [],
+      activeTabId: null,
+    })
+  }
 
   return (
     <section id="mobile-home">
       {/* Content area — relative so absolute icons are scoped here */}
-      <div className="mobile-content-area">
+      <div className={`mobile-content-area ${showTabletShortcuts ? 'mobile-content-area--tablet-layout' : ''}`}>
+        {showTabletShortcuts && (
+          <div className="mobile-tablet-shortcuts" aria-label="Tablet shortcuts">
+            <div className="mobile-tablet-shortcut-column mobile-tablet-shortcut-column--projects">
+              {tabletProjects.map((project) => (
+                <button
+                  key={project.id}
+                  type="button"
+                  className="mobile-tablet-shortcut"
+                  onClick={() => handleProjectShortcut(project)}
+                  aria-label={project.name}
+                >
+                  <img
+                    src={project.icon ?? '/images/folder.png'}
+                    alt=""
+                    className="mobile-tablet-shortcut-icon"
+                  />
+                  <span className="mobile-tablet-shortcut-label">{project.name}</span>
+                </button>
+              ))}
+            </div>
+
+            <div className="mobile-tablet-shortcut-column mobile-tablet-shortcut-column--resume">
+              <button
+                type="button"
+                className="mobile-tablet-shortcut"
+                onClick={handleResumeShortcut}
+                aria-label={resumeShortcut.name}
+              >
+                <img
+                  src={resumeShortcut.icon}
+                  alt=""
+                  className="mobile-tablet-shortcut-icon"
+                />
+                <span className="mobile-tablet-shortcut-label">{resumeShortcut.name}</span>
+              </button>
+            </div>
+          </div>
+        )}
+
         {/* Animated welcome text */}
         <div className="mobile-welcome">
           <p ref={subtitleRef} className="mobile-welcome-sub">
@@ -164,24 +207,6 @@ const MobileHomeScreen = () => {
             {renderText('Portfolio', 'text-6xl tracking-[0.08em] italic', 300)}
           </h1>
         </div>
-
-        {/* Draggable desktop-style icons */}
-        {desktopItems.map((item) => (
-          <div
-            key={item.id}
-            data-mob-item={item.id}
-            className={`mob-folder group absolute flex flex-col items-center select-none ${iconPositions[item.id] ?? 'top-[10vh] left-6'}`}
-          >
-            <img
-              src={item.icon ?? '/images/folder.png'}
-              alt={item.name}
-              className="w-16 h-16 object-contain group-hover:bg-gray-950/10 p-1 rounded-md"
-            />
-            <p className="text-xs text-white text-center px-1 rounded-md mt-1 group-hover:bg-blue-500 transition-colors max-w-[80px] leading-tight">
-              {item.name}
-            </p>
-          </div>
-        ))}
       </div>
 
       {/* Search pill */}
