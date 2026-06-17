@@ -9,7 +9,7 @@ import useMobileWindowStore from '#store/mobileWindow.js'
 /* ── Same font-weight animation as Welcome.jsx, adapted for touch ── */
 const FONT_WEIGHTS = {
   subtitle: { min: 100, max: 400, default: 100 },
-  title:    { min: 100, max: 800, default: 300 },
+  title: { min: 100, max: 800, default: 300 },
 }
 
 const MOBILE_FINDER_TABS = [
@@ -69,25 +69,25 @@ const setupTextInteraction = (container, type) => {
 
   const reset = () => letters.forEach(l => animate(l, baseweight))
 
-  const onMouseMove  = (e) => applyAt(e.clientX)
-  const onTouchMove  = (e) => applyAt(e.touches[0].clientX)
+  const onMouseMove = (e) => applyAt(e.clientX)
+  const onTouchMove = (e) => applyAt(e.touches[0].clientX)
 
-  container.addEventListener('mousemove',  onMouseMove)
+  container.addEventListener('mousemove', onMouseMove)
   container.addEventListener('mouseleave', reset)
-  container.addEventListener('touchmove',  onTouchMove, { passive: true })
-  container.addEventListener('touchend',   reset)
+  container.addEventListener('touchmove', onTouchMove, { passive: true })
+  container.addEventListener('touchend', reset)
 
   return () => {
-    container.removeEventListener('mousemove',  onMouseMove)
+    container.removeEventListener('mousemove', onMouseMove)
     container.removeEventListener('mouseleave', reset)
-    container.removeEventListener('touchmove',  onTouchMove)
-    container.removeEventListener('touchend',   reset)
+    container.removeEventListener('touchmove', onTouchMove)
+    container.removeEventListener('touchend', reset)
   }
 }
 
 /* ── Component ── */
 const MobileHomeScreen = () => {
-  const titleRef    = useRef(null)
+  const titleRef = useRef(null)
   const subtitleRef = useRef(null)
   const { isTablet } = useDeviceMode()
   const openMobileWindow = useMobileWindowStore((state) => state.open)
@@ -109,7 +109,7 @@ const MobileHomeScreen = () => {
   /* Animated text */
   useGSAP(() => {
     const c1 = setupTextInteraction(subtitleRef.current, 'subtitle')
-    const c2 = setupTextInteraction(titleRef.current,    'title')
+    const c2 = setupTextInteraction(titleRef.current, 'title')
     return () => { c1?.(); c2?.() }
   }, [])
 
@@ -210,7 +210,7 @@ const MobileHomeScreen = () => {
       </div>
 
       {/* Search pill */}
-      <div className="mobile-search-wrap">
+      {/* <div className="mobile-search-wrap">
         <button className="mobile-search-pill" aria-label="Search">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <circle cx="10" cy="10" r="7"/>
@@ -218,7 +218,7 @@ const MobileHomeScreen = () => {
           </svg>
           <span>Search</span>
         </button>
-      </div>
+      </div> */}
 
       {/* Dock */}
       <div className="mobile-dock">

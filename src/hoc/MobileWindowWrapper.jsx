@@ -58,14 +58,14 @@ const MobileWindowWrapper = () => {
       <div className="mob-win-nav">
         <button className="mob-win-back" onClick={pop} aria-label="Go back">
           <ChevronLeft />
-          <span>{canGoBack ? 'Go back' : 'Go back'}</span>
+          <span>{canGoBack ? 'Back' : 'Back'}</span>
         </button>
 
         <h2 className="mob-win-title">{current.title}</h2>
 
         <button className="mob-win-cancel" onClick={close} aria-label="Cancel">
-          <ListIcon />
-          <span>Cancel</span>
+          {/* <ListIcon /> */}
+          <span>Close</span>
         </button>
       </div>
 
